@@ -18,7 +18,7 @@ class ScheduleFragment : Fragment() {
     private lateinit var binding:FragmentScheduleBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as MainActivity).hideMoreAndShowBack(true)
+        (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
         (activity as MainActivity).binding.navText.text=""
 
