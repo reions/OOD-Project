@@ -8,14 +8,19 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kauplus.MainActivity
 import com.example.kauplus.R
 import com.example.kauplus.databinding.FragmentScheduleBinding
 
 class ScheduleFragment : Fragment() {
 
     private var itemList: ArrayList<Meeting> = ArrayList()
+    private lateinit var binding:FragmentScheduleBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (activity as MainActivity).hideMoreAndShowBack(true)
+        (activity as MainActivity).hideLogoAndShowTitle(true)
+        (activity as MainActivity).binding.navText.text=""
 
     }
 
@@ -23,7 +28,7 @@ class ScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding=FragmentScheduleBinding.inflate(inflater,container,false)
+        binding=FragmentScheduleBinding.inflate(inflater,container,false)
 
         //대부분의 작업 수행
         itemList= arrayListOf(
