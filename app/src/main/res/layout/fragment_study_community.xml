@@ -14,8 +14,6 @@
         android:layout_height="20dp"
         android:layout_marginStart="41dp"
         android:layout_marginTop="187dp"
-        android:layout_marginEnd="299dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/twemoji_blue_book" />
@@ -27,13 +25,10 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="73dp"
         android:layout_marginEnd="308dp"
-        android:layout_marginBottom="641dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/category" />
 
     <ImageView
@@ -41,13 +36,14 @@
         android:layout_width="61dp"
         android:layout_height="61dp"
         android:layout_marginStart="267dp"
+        android:layout_marginTop="98dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item3"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/write_new_post" />
 
@@ -70,8 +66,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/item3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item1"
         app:srcCompat="@drawable/cornor_rectangle" />
@@ -81,24 +79,92 @@
         android:layout_width="match_parent"
         android:layout_height="114dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item2"
-        app:srcCompat="@drawable/cornor_rectangle" />
+        app:srcCompat="@drawable/cornor_rectangle"
+        tools:layout_editor_absoluteY="493dp" />
 
     <ImageView
         android:id="@+id/item1"
         android:layout_width="match_parent"
         android:layout_height="114dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="231dp"
+        android:layout_marginTop="23dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_community"
         app:srcCompat="@drawable/cornor_rectangle" />
+
+    <TextView
+        android:id="@+id/text_community"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="188dp"
+        android:text="스터디 커뮤니티"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="43dp"
+        android:text="beaf03님, 환영합니다"
+        android:textColor="#257AD9"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category" />
+
+    <ImageView
+        android:id="@+id/rectangle_blue"
+        android:layout_width="56dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item1"
+        app:layout_constraintEnd_toEndOf="@+id/item1"
+        app:srcCompat="@drawable/blue_tawon" />
+
+    <TextView
+        android:id="@+id/txt_guin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="21dp"
+        android:text="알고리즘 스터디 멤버 구합니다"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/item1"
+        app:layout_constraintTop_toTopOf="@+id/item1" />
+
+    <TextView
+        android:id="@+id/txt_time_to_meet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:text="\u00B7 14 : 00~15 : 00"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/item1"
+        app:layout_constraintTop_toBottomOf="@+id/txt_guin" />
+
+    <TextView
+        android:id="@+id/txt_groupspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:text="\u00B7 C1 스터디룸"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/item1"
+        app:layout_constraintTop_toBottomOf="@+id/txt_time_to_meet" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
