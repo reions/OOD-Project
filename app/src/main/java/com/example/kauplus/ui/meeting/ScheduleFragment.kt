@@ -18,10 +18,9 @@ class ScheduleFragment : Fragment() {
     private lateinit var binding:FragmentScheduleBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (activity as MainActivity).binding.navText.text="회의 일정"
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-        (activity as MainActivity).binding.navText.text="회의 일정"
-
     }
 
     override fun onCreateView(
