@@ -20,7 +20,7 @@ class ScheduleFragment : Fragment() {
         super.onCreate(savedInstanceState)
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-        (activity as MainActivity).binding.navText.text=""
+        (activity as MainActivity).binding.navText.text="시설 신청"
 
     }
 

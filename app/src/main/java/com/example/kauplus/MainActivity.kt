@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         }
         /*binding.drLogout.setOnClickListener{
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
-
         }*/
     }
 
