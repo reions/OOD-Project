@@ -72,15 +72,7 @@
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="시설 예약 불러오기"
-            android:textSize="16sp"
-            android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/skyBlue"
-            android:layout_marginTop="20dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
