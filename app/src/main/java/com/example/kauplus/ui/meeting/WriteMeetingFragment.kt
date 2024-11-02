@@ -118,4 +118,11 @@ class WriteMeetingFragment : Fragment() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         pickImageLauncher.launch(galleryIntent)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).binding.navText.text="회의 일정"
+        (activity as MainActivity).hideMoreAndShowBack(false)
+        (activity as MainActivity).hideLogoAndShowTitle(true)
+    }
 }
