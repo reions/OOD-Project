@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.kauplus.R
 
@@ -16,11 +17,15 @@ class ToDoRVAdapter (private val context: Context, private val todoList: ArrayLi
             .from(context)
             .inflate(R.layout.item_to_do, parent,false)
 
-        val toDo = view.findViewById<TextView>(R.id.text_to_do)
-
-        val toDoItem = todoList[position]
-        toDo.text=toDoItem
-
+        val toDo = view.findViewById<TextView>(R.id.text_to_do).run {
+            val toDoItem = todoList[position]
+            text=toDoItem
+        }
+        val icCheck=view.findViewById<ImageView>(R.id.check).run {
+            setOnClickListener {
+                isSelected=!isSelected
+            }
+        }
         return view
     }
 

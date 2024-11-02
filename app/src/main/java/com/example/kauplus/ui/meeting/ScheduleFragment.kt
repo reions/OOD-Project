@@ -20,7 +20,7 @@ class ScheduleFragment : Fragment() {
         super.onCreate(savedInstanceState)
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-        (activity as MainActivity).binding.navText.text="시설 신청"
+        (activity as MainActivity).binding.navText.text="회의 일정"
 
     }
 
@@ -58,6 +58,10 @@ class ScheduleFragment : Fragment() {
             binding.textReservedMeeting.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
             binding.textClosedMeeting.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             binding.btnWriteMeeting.visibility=View.GONE
+        }
+
+        binding.btnWriteMeeting.setOnClickListener {
+            (activity as MainActivity).addFragment(WriteMeetingFragment())
         }
         return binding.root
 
