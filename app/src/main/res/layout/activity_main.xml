@@ -57,9 +57,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/inter_regular"
+                android:fontFamily="@font/inter_semi_bold"
                 android:text="시설 신청"
-                android:textSize="20dp"
+                android:textSize="17sp"
                 android:visibility="gone" />
         </androidx.appcompat.widget.Toolbar>
 
