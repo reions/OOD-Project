@@ -5,10 +5,10 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frag2ment" >
+    tools:context=".facility.confirmResFragment">
 
     <ImageView
-        android:id="@+id/imageView20"
+        android:id="@+id/btn_x"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="281dp"
