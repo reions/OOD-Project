@@ -7,38 +7,69 @@
     android:layout_height="match_parent"
     tools:context=".study.PostDetailFragment">
 
-    <TextView
-        android:id="@+id/txt_post_writer"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:text="helloworld!08"
-        android:textColor="#2660B4"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="94dp" />
+        android:layout_marginTop="39dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_guin2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="알고리즘 스터디 멤버 구합니다"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_post_writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:text="helloworld!08"
+            android:textColor="#2660B4"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_writingtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:text="10/22 18:05" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/cornor_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_writingtime" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txt_post_writer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="2dp"
         android:text="helloworld!08"
         android:textColor="#2660B4"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <TextView
-        android:id="@+id/txt_writingtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="6dp"
-        android:text="10/22 18:05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_post_writer" />
+        tools:layout_editor_absoluteY="480dp" />
 
     <TextView
         android:id="@+id/textView8"
@@ -62,72 +93,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_comment_writer" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:src="@drawable/cornor_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_writingtime" />
-
-    <TextView
-        android:id="@+id/txt_guin2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="알고리즘 스터디 멤버 구합니다"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="230dp" />
-
     <TextView
         android:id="@+id/txt_time_to_meet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="17dp"
         android:text="\u00B7 14 : 00~15 : 00"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/txt_body_text" />
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="371dp" />
 
     <TextView
         android:id="@+id/txt_groupspace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="7dp"
         android:text="\u00B7 C1 스터디룸"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/txt_time_to_meet" />
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="397dp" />
 
     <TextView
         android:id="@+id/txt_body_text"
         android:layout_width="262dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="25dp"
         android:text="내일 도서관 스터디룸에서 함께 알고리즘 공부할 동기 모집합니다. \n남녀 학년 상관 없으니 부담없이 참여해주시면 감사하겠습니다."
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/txt_guin2" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:src="@drawable/blue_filledrectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        tools:layout_editor_absoluteX="49dp"
+        tools:layout_editor_absoluteY="272dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -200,10 +190,8 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        tools:layout_editor_absoluteX="189dp"
+        tools:layout_editor_absoluteY="400dp" />
 
     <TextView
         android:id="@+id/textView13"
