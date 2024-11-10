@@ -3,29 +3,53 @@ package com.example.kauplus.facility
 import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.R
-import com.example.kauplus.databinding.BottomSheetMeetingDetailBinding
-import com.example.kauplus.databinding.FragmentFacilityAppBinding
 import com.example.kauplus.databinding.FragmentFacilityBottomSeatBinding
+import com.example.kauplus.ui.meeting.Facility_ResRVAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 class facility_bottom_seatFragment : BottomSheetDialogFragment() {
-    private var selectedImageView: View? = null
 
+    private var timeList: ArrayList<ReservationTime> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentFacilityBottomSeatBinding.inflate(inflater, container, false)
+
+        timeList = arrayListOf(
+            ReservationTime("09:00~10:00"),
+            ReservationTime("10:00~11:00"),
+            ReservationTime("11:00~12:00"),
+            ReservationTime("12:00~13:00"),
+            ReservationTime("13:00~14:00"),
+            ReservationTime("14:00~15:00"),
+            ReservationTime("15:00~16:00"),
+            ReservationTime("16:00~17:00"),
+            ReservationTime("17:00~18:00"),
+            ReservationTime("18:00~19:00"),
+            ReservationTime("19:00~20:00"),
+            ReservationTime("20:00~21:00"),
+            ReservationTime("21:00~22:00"),
+            ReservationTime("23:00~24:00")
+        )
+
+
+        val facilityResRVAdapter = Facility_ResRVAdapter(timeList)
+        binding.recTime.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recTime.adapter = facilityResRVAdapter
+
+
+
+
 
         binding.txtPurpose.setOnClickListener{
             val input = EditText(requireContext()).apply {
@@ -44,9 +68,6 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
                 }
                 .show()
         }
-        binding.bottomBtn1.setOnClickListener { ImageSelection(it as ImageView) }
-        binding.bottomBtn2.setOnClickListener { ImageSelection(it as ImageView) }
-        binding.bottomBtn3.setOnClickListener { ImageSelection(it as ImageView) }
 
         val roomText = arguments?.getString("roomText") ?: "C1 스터디룸"
         binding.txtName.text = roomText
@@ -59,19 +80,7 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
         return binding.root
 
     }
-    private fun ImageSelection(view: ImageView) {
-        if (selectedImageView == view) {
-            // 현재 이미지 선택 해제
-            view.setImageResource(R.drawable.image_for)
-            selectedImageView = null
-        } else {
-            // 이전 선택된 이미지를 원래 색으로 돌림
-            selectedImageView?.setImageResource(R.drawable.image_for)
-            // 새로운 이미지 선택하여 파란색으로 설정
-            view.setImageResource(R.drawable.image_for_blue)
-            selectedImageView = view
-        }
-    }
+
 
     private fun applyFadeAnimation(view: View, fromAlpha: Float, toAlpha: Float, duration: Long) {
         val animator = ObjectAnimator.ofFloat(view, View.ALPHA, fromAlpha, toAlpha)
@@ -83,6 +92,3 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
 
 }
 
-private fun View?.setImageResource(white: Int) {
-
-}

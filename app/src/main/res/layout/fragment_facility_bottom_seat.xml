@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/res_time"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/image_for_round"
@@ -37,34 +37,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/bottom_btn1"
-        android:layout_width="110dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="128dp"
-        android:src="@drawable/image_for"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/bottomBtn2"
-        android:layout_width="110dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="14dp"
-        android:src="@drawable/image_for"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_btn1"
-        app:layout_constraintStart_toEndOf="@+id/bottom_btn1" />
-
-    <ImageView
-        android:id="@+id/bottom_btn3"
-        android:layout_width="110dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="14dp"
-        android:src="@drawable/image_for"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomBtn2"
-        app:layout_constraintStart_toEndOf="@+id/bottomBtn2" />
-
-    <ImageView
         android:id="@+id/btm_res"
         android:layout_width="294dp"
         android:layout_height="39dp"
@@ -75,37 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView28" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="77dp"
-        android:layout_height="16dp"
-        android:text="13:00~14:00"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_btn1"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_btn1"
-        app:layout_constraintStart_toStartOf="@+id/bottom_btn1"
-        app:layout_constraintTop_toTopOf="@+id/bottom_btn1" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="14:00~15:00"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomBtn2"
-        app:layout_constraintEnd_toEndOf="@+id/bottomBtn2"
-        app:layout_constraintStart_toStartOf="@+id/bottomBtn2"
-        app:layout_constraintTop_toTopOf="@+id/bottomBtn2" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="15:00~16:00"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_btn3"
-        app:layout_constraintEnd_toEndOf="@+id/bottom_btn3"
-        app:layout_constraintStart_toStartOf="@+id/bottom_btn3"
-        app:layout_constraintTop_toTopOf="@+id/bottom_btn3"
-        app:layout_constraintVertical_bias="0.44" />
 
     <TextView
         android:id="@+id/textView25"
@@ -155,5 +96,18 @@
         app:layout_constraintEnd_toEndOf="@+id/btm_res"
         app:layout_constraintStart_toStartOf="@+id/btm_res"
         app:layout_constraintTop_toTopOf="@+id/btm_res" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_time"
+        android:layout_width="358dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

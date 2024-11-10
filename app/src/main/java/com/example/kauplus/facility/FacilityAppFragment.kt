@@ -47,13 +47,21 @@ class facilityAppFragment : Fragment() {
         binding?.btnE1?.setOnClickListener { onItemClick("전자관 413호") }
         binding?.btnS1?.setOnClickListener { onItemClick("농구장") }
         binding?.btnS2?.setOnClickListener { onItemClick("테니스장") }
-        binding?.btnS3?.setOnClickListener { onItemClick("운동장") }
+        binding?.btnS3?.setOnClickListener { onItemClick("축구장") }
+
+        binding?.resTxt?.setOnClickListener {
+            (activity as MainActivity).addFragment(fragCencle())
+        }
+        binding?.resIm?.setOnClickListener {
+            (activity as MainActivity).addFragment(fragCencle())
+        }
 
 
 
 
         return binding?.root
     }
+
 
 
 

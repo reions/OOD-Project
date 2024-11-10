@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.databinding.FragmentFragCencleBinding
+import com.example.kauplus.ui.meeting.FacilityRVAdapter
 
 class fragCencle : Fragment() {
     private var reservation: ArrayList<Reservation> = ArrayList()
