@@ -8,16 +8,6 @@
     tools:layout_editor_absoluteX="-8dp"
     tools:layout_editor_absoluteY="-6dp">
 
-    <ImageView
-        android:id="@+id/btn_writing"
-        android:layout_width="61dp"
-        android:layout_height="61dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/write_new_post" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,6 +55,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_posts"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

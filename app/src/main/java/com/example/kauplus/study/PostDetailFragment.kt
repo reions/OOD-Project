@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 // import com.example.kauplus.ARG_PARAM2
 import com.example.kauplus.R
 
-
+// 댓글 추가하는 기능은 writePostFrangment에 interface 부분이랑 WriteMeetingFragment
 class PostDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
