@@ -20,11 +20,13 @@ class ScheduleFragment : Fragment() {
     private var itemList: ArrayList<Meeting> = ArrayList()
     private lateinit var binding:FragmentScheduleBinding
     val viewModel:MeetingViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (activity as MainActivity).binding.navText.text="회의 일정"
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-        (activity as MainActivity).binding.navText.text=""
+
     }
 
     override fun onCreateView(
@@ -32,8 +34,7 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding=FragmentScheduleBinding.inflate(inflater,container,false)
-        return binding.root
-    }
+        return binding.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,6 +72,9 @@ class ScheduleFragment : Fragment() {
             binding.btnWriteMeeting.visibility=View.GONE
         }
 
+        binding.btnWriteMeeting.setOnClickListener {
+            (activity as MainActivity).addFragment(WriteMeetingFragment())
+        }
     }
 
 }
