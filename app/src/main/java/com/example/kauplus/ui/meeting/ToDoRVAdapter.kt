@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.kauplus.R
 
-class ToDoRVAdapter (private val context: Context, private val todoList: ArrayList<String>) : BaseAdapter() {
+class ToDoRVAdapter (private val context: Context, private val todoList: List<String>) : BaseAdapter() {
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater

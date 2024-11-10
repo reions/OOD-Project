@@ -2,17 +2,25 @@ package com.example.kauplus.ui.meeting
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.R
 import com.example.kauplus.databinding.ItemMeetingBinding
+import com.example.kauplus.viewmodel.MeetingViewModel
 
-class ScheduleRVAdapter (itemList: MutableList<Meeting>): RecyclerView.Adapter<ScheduleRVAdapter.NewsRVViewHolder>() {
+class ScheduleRVAdapter (private val meetingList: LiveData<ArrayList<Meeting>>): RecyclerView.Adapter<ScheduleRVAdapter.NewsRVViewHolder>() {
 
-    var meetingList: MutableList<Meeting> =itemList
-        set(value){
-            field=value
-            notifyDataSetChanged()
-        }
+    interface MyItemClickListener{
+        fun onItemClick(meetingId: String?)
+        fun onDeleteMeeting(meetingId: String?)
+
+    }
+    private lateinit var myItemClickListener: MyItemClickListener
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener){
+        myItemClickListener=itemClickListener
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -25,44 +33,32 @@ class ScheduleRVAdapter (itemList: MutableList<Meeting>): RecyclerView.Adapter<S
             )
         )
     }
-
-    interface MyItemClickListener{
-        fun onItemClick(position: Int)
-
-    }
-    private lateinit var myItemClickListener: MyItemClickListener
-    fun setMyItemClickListener(itemClickListener: MyItemClickListener){
-        myItemClickListener=itemClickListener
-    }
-
     inner class NewsRVViewHolder(private val binding: ItemMeetingBinding) :
         RecyclerView.ViewHolder(binding.root){
-        val title=binding.meetingTitle
-        val time=binding.time
-        val place=binding.place
-        val delete=binding.delete
+        fun bind(meeting: Meeting?) {
+            meeting?.let {
+                binding.meetingTitle.text = it.title
+                binding.time.text = it.time
+                binding.place.text = it.place
+            }
+            binding.root.setOnClickListener {
+                myItemClickListener.onItemClick(meeting?.id)
+            }
+            binding.delete.setOnClickListener {
+                myItemClickListener.onDeleteMeeting(meeting?.id)
+                /*meeting?.id?.let { id ->
+                    (binding.root.context as? ScheduleFragment)?.viewModel?.deleteMeeting(id)
+                }*/
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ScheduleRVAdapter.NewsRVViewHolder, position: Int) {
-        holder.title.text=meetingList[position].title
-        holder.time.text=holder.itemView.context.getString(R.string.to_do_item, meetingList[position].time)
-        holder.place.text=holder.itemView.context.getString(R.string.to_do_item, meetingList[position].place)
-        holder.itemView.setOnClickListener {
-            myItemClickListener.onItemClick(position)
-        }
-        holder.delete.setOnClickListener {
-            deleteItem(position)
-        }
-    }
-
-    private fun deleteItem(position: Int) {
-        meetingList.removeAt(position)          // Remove the item from the list
-        notifyItemRemoved(position)             // Notify the adapter of item removal
-        notifyItemRangeChanged(position, meetingList.size) // Update positions of remaining items
+        holder.bind(meetingList.value?.getOrNull(position))
     }
     override fun getItemViewType(position: Int): Int =position
 
-    override fun getItemCount(): Int =meetingList.size
+    override fun getItemCount(): Int =meetingList.value?.size?:0
 
 
 }
