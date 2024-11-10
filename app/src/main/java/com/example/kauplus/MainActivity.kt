@@ -8,9 +8,8 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.kauplus.databinding.ActivityMainBinding
-import com.example.kauplus.facility.facilityAppFragment
 import com.example.kauplus.ui.meeting.ScheduleFragment
-
+import com.example.kauplus.ui.study.StudyFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -50,20 +49,17 @@ class MainActivity : AppCompatActivity() {
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
         }
 
-       binding.drFacility.setOnClickListener{
-            addFragment(facilityAppFragment())
+      /*  binding.drFacility.setOnClickListener{
+            addFragment(FacilityFragment())
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
-        }
+        }*/
         binding.drSchedule.setOnClickListener{
             addFragment(ScheduleFragment())
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
         }
         /*binding.drLogout.setOnClickListener{
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
-
-        }
-
-         */
+        }*/
     }
 
     override fun onBackPressed() {
@@ -101,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container_main, fragment).commit()
     }
-     fun addFragment(fragment: Fragment) {
+    fun addFragment(fragment: Fragment) {
         supportFragmentManager
             .commit {
                 replace(R.id.container_main, fragment)

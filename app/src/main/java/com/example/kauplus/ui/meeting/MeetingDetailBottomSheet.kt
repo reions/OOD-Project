@@ -19,15 +19,17 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = BottomSheetMeetingDetailBinding.inflate(inflater, container, false)
+        val toDoList= arrayListOf<String>(
+            "피피티 디자인 정하기",
+            "최종 발표자 정하기",
+            "저번주 개발 진행 상황 브리핑"
+        )
+
+        val toDoAdapter = ToDoRVAdapter(requireContext(), toDoList)
+        binding.listToDo.adapter = toDoAdapter
 
         return binding.root
 
     }
 
-
-    private fun applyFadeAnimation(view: View, fromAlpha: Float, toAlpha: Float, duration: Long) {
-        val animator = ObjectAnimator.ofFloat(view, View.ALPHA, fromAlpha, toAlpha)
-        animator.duration = duration
-        animator.start()
-    }
 }
