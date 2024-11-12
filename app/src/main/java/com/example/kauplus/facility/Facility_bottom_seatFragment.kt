@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kauplus.R
 import com.example.kauplus.databinding.FragmentFacilityBottomSeatBinding
 import com.example.kauplus.ui.meeting.Facility_ResRVAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class facility_bottom_seatFragment : BottomSheetDialogFragment() {
 
     private var timeList: ArrayList<ReservationTime> = ArrayList()
-
+    private  var binding: FragmentFacilityBottomSeatBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,14 +42,14 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
 
 
         val facilityResRVAdapter = Facility_ResRVAdapter(timeList)
-        binding.recTime.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.recTime.adapter = facilityResRVAdapter
+        binding?.recTime?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding?.recTime?.adapter = facilityResRVAdapter
 
 
 
 
 
-        binding.txtPurpose.setOnClickListener{
+        binding?.txtPurpose?.setOnClickListener{
             val input = EditText(requireContext()).apply {
                 hint = "사용 목적을 입력해 주세요."
             }
@@ -60,7 +58,7 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
                 .setView(input)
                 .setPositiveButton("확인"){dialog,_ ->
                     val enteredText = input.text.toString()
-                    binding.txtPurpose.text = enteredText
+                    binding?.txtPurpose?.text = enteredText
                     dialog.dismiss()
                 }
                 .setNeutralButton("취소"){dialog, _ ->
@@ -68,17 +66,15 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
                 }
                 .show()
         }
-
         val roomText = arguments?.getString("roomText") ?: "C1 스터디룸"
-        binding.txtName.text = roomText
+        binding?.txtName?.text = roomText
 
-        binding.btmRes.setOnClickListener {
+        binding?.btmRes?.setOnClickListener {
             val confirmResBottomsheets = confirmResFragment()
             confirmResBottomsheets.show(parentFragmentManager,"confirmResFragment")
         }
 
         return binding.root
-
     }
 
 
@@ -86,6 +82,11 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
         val animator = ObjectAnimator.ofFloat(view, View.ALPHA, fromAlpha, toAlpha)
         animator.duration = duration
         animator.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
 

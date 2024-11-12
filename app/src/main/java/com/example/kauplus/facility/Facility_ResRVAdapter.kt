@@ -28,6 +28,14 @@ class Facility_ResRVAdapter(private val timeList: ArrayList<ReservationTime>) : 
         val currentItem = TimeList[position]
         holder.textView.text = currentItem.time
 
+        holder.itemView.setOnClickListener {
+            if (selectedPositions.contains(position)) {
+                selectedPositions.remove(position) // 이미 선택된 경우 선택 해제
+            } else {
+                selectedPositions.add(position) // 새로운 항목을 선택
+            }
+            notifyItemChanged(position) // 선택된 항목만 갱신
+        }
         // 선택 여부에 따라 TextView의 배경색과 텍스트 색상을 설정
         if (selectedPositions.contains(position)) {
             holder.textView.setBackgroundResource(R.drawable.blue_stroke_rectangle) // 선택된 경우 파란색 배경
@@ -37,14 +45,6 @@ class Facility_ResRVAdapter(private val timeList: ArrayList<ReservationTime>) : 
             holder.textView.setTextColor(ContextCompat.getColor(holder.textView.context, R.color.black)) // 텍스트 검정색
         }
 
-        holder.itemView.setOnClickListener {
-            if (selectedPositions.contains(position)) {
-                selectedPositions.remove(position) // 이미 선택된 경우 선택 해제
-            } else {
-                selectedPositions.add(position) // 새로운 항목을 선택
-            }
-            notifyItemChanged(position) // 선택된 항목만 갱신
-        }
     }
 
     override fun getItemCount(): Int = TimeList.size

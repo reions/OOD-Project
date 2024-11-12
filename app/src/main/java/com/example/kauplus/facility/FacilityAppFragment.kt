@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.kauplus.MainActivity
-import com.example.kauplus.R
 import com.example.kauplus.databinding.FragmentFacilityAppBinding
-import com.example.kauplus.ui.meeting.MeetingDetailBottomSheet
 
 
 class facilityAppFragment : Fragment() {
@@ -30,12 +27,6 @@ class facilityAppFragment : Fragment() {
     ): View? {
         binding= FragmentFacilityAppBinding.inflate(inflater,container,false)
 
-        binding?.resIm?.setOnClickListener {
-
-        }
-        binding?.resTxt?.setOnClickListener{
-           
-        }
 
         binding?.c1Btn?.setOnClickListener { onItemClick("C1 스터디룸") }
         binding?.c1Btn2?.setOnClickListener { onItemClick("C2 스터디룸") }
@@ -55,8 +46,6 @@ class facilityAppFragment : Fragment() {
         binding?.resIm?.setOnClickListener {
             (activity as MainActivity).addFragment(fragCencle())
         }
-
-
 
 
         return binding?.root

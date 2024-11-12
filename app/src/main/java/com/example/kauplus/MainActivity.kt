@@ -8,8 +8,8 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.kauplus.databinding.ActivityMainBinding
+import com.example.kauplus.facility.facilityAppFragment
 import com.example.kauplus.ui.meeting.ScheduleFragment
-import com.example.kauplus.ui.study.StudyFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         binding.ivMore.setOnClickListener {
             binding.mainDrawerLayout.openDrawer((GravityCompat.START))
         }
+
         binding.drLogout.setOnClickListener{
             finish()
             startActivity(intent)
@@ -56,6 +57,11 @@ class MainActivity : AppCompatActivity() {
         binding.drSchedule.setOnClickListener{
             addFragment(ScheduleFragment())
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
+        }
+        binding.drFacility.setOnClickListener {
+            addFragment(facilityAppFragment())
+            binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
+
         }
         /*binding.drLogout.setOnClickListener{
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))

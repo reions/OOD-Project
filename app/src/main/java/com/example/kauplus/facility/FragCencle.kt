@@ -11,7 +11,7 @@ import com.example.kauplus.ui.meeting.FacilityRVAdapter
 
 class fragCencle : Fragment() {
     private var reservation: ArrayList<Reservation> = ArrayList()
-    lateinit var binding: FragmentFragCencleBinding
+    private var binding: FragmentFragCencleBinding? = null
 
 
 
@@ -28,10 +28,10 @@ class fragCencle : Fragment() {
         )
 
         val facilityRVAdapter = FacilityRVAdapter(reservation)
-        val recyclerView = binding.recClass
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = facilityRVAdapter
-        return (binding.root)
+        val recyclerView = binding?.recClass
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        recyclerView?.adapter = facilityRVAdapter
+        return binding?.root
     }
 
 }
