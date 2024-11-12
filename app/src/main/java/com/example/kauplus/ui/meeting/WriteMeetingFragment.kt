@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.kauplus.MainActivity
 import com.example.kauplus.R
-import com.example.kauplus.databinding.FragmentStudyBinding
+import com.example.kauplus.databinding.FragmentStudyCommunityBinding
 import com.example.kauplus.databinding.FragmentWriteMeetingBinding
 import java.io.File
 

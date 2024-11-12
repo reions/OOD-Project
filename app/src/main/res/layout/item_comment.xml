@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/txt_comment_writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="helloworld!08"
+            android:textColor="#2660B4"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10/22 18:05"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/txt_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="멤버가 합이 잘 맞을 경우 정기 스터디 진행할 계획이 있습니다." />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/gray_stroke_rectangle" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,15 +22,15 @@
             android:textSize="18sp"
             android:text=" 프로젝트 X 8주차 회의"
             />
+
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:textSize="14sp"
             android:text="14:00~15:00"
-            />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
         <TextView
             android:id="@+id/place"
             android:layout_width="wrap_content"

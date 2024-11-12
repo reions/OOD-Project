@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".study.StudyAcceptFragment">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="match_parent"
+        android:layout_height="205dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="272dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/cornor_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="180dp"
+        android:layout_height="56dp"
+        android:src="@drawable/rounded_cornor_left"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/imageView8" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="180dp"
+        android:layout_height="56dp"
+        android:src="@drawable/rounded_cornor_right"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8" />
+
+    <TextView
+        android:id="@+id/txt_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="취소"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+    <TextView
+        android:id="@+id/txt_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확정"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+    <TextView
+        android:id="@+id/txt_pardon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="150dp"
+        android:text="그룹에 참여하시겠습니까?"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/xmark"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+</androidx.constraintlayout.widget.ConstraintLayout>
