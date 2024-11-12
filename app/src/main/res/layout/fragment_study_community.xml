@@ -57,7 +57,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_posts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp" />
 
     </LinearLayout>
 

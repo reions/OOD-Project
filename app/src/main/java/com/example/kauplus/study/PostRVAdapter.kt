@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.databinding.ItemPostsBinding
+import com.example.kauplus.ui.meeting.ScheduleRVAdapter
 
 class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVAdapter.PostRVViewHolder>() {
 
@@ -14,6 +15,7 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         }
 
     override fun onCreateViewHolder(
+
         parent: ViewGroup,
         viewType: Int
     ): PostRVAdapter.PostRVViewHolder {
@@ -24,6 +26,16 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
                 false
             )
         )
+
+    }
+   interface MyItemClickListener{
+        fun onItemClick(position: Int)
+
+    }
+    private lateinit var myItemClickListener: MyItemClickListener
+
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener){
+        myItemClickListener=itemClickListener
     }
 
     inner class PostRVViewHolder(private val binding: ItemPostsBinding) :
@@ -32,6 +44,7 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         val time=binding.txtTime
         val place=binding.txtSpace
         val participant = binding.txtParticipant
+
     }
 
     override fun onBindViewHolder(holder: PostRVAdapter.PostRVViewHolder, position: Int) {
@@ -39,6 +52,9 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         holder.time.text = postList[position].time
         holder.place.text = postList[position].space
         holder.participant.text = postList[position].participant
+        holder.itemView.setOnClickListener{
+            myItemClickListener.onItemClick(position)
+        }
 
     }
 

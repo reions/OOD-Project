@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-// import com.example.kauplus.ARG_PARAM1
-// import com.example.kauplus.ARG_PARAM2
 import com.example.kauplus.R
 
 // 댓글 추가하는 기능은 writePostFrangment에 interface 부분이랑 WriteMeetingFragment
@@ -26,10 +24,4 @@ class PostDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_post_detail, container, false)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PostDetailFragment().apply {
-            }
-    }
 }

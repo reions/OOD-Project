@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="114dp"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginBottom="30dp"
     android:background="@drawable/gray_stroke_rectangle"
     tools:layout_editor_absoluteX="124dp"
-    tools:layout_editor_absoluteY="148dp" >
+    tools:layout_editor_absoluteY="148dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
