@@ -1,6 +1,7 @@
 package com.example.kauplus.repository
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.kauplus.ui.meeting.Meeting
 import com.google.firebase.Firebase
@@ -27,30 +28,30 @@ class MeetingRepository {
                 meetings.postValue(meetingList)
             }
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
+                Log.e("Firebase", error.toString())
             }
         })
     }
 
-    // Meeting 데이터 Firebase에 저장
     suspend fun saveMeeting(meeting: Meeting): Boolean {
         return try {
             val newMeetingRef = meetingRef.push()
-            meeting.id = newMeetingRef.key // Firebase ID를 Meeting 객체에 설정
+            meeting.id = newMeetingRef.key
             newMeetingRef.setValue(meeting).await()
             true
         } catch (e: Exception) {
+            Log.e("Firebase", "회의 저장 실패: ${e.message}")
             false
         }
     }
 
-    suspend fun deleteMeeting(meetingId: String?) {
+    fun deleteMeeting(meetingId: String?) {
         if (meetingId!=null){
             meetingRef.child(meetingId).removeValue()
         }
     }
 
-    suspend fun uploadImage(imageUri: Uri): String? {
+    suspend fun uploadImage(imageUri: Uri): String {
         val imageRef = storage.child("meetings/${UUID.randomUUID()}.jpg")
         return imageRef.putFile(imageUri).await().storage.downloadUrl.await().toString()
     }

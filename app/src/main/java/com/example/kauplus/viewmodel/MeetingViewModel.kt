@@ -39,13 +39,11 @@ class MeetingViewModel : ViewModel() {
         viewModelScope.launch {
             val imageUrls = mutableListOf<String?>()
 
-            // 각 이미지 업로드 후 URL 목록에 추가
             imageUris.forEach { uri ->
                 val url = repository.uploadImage(uri)
                 imageUrls.add(url)
             }
 
-            // Meeting 객체 생성 및 이미지 URL 설정
             val meeting = Meeting(
                 title = title,
                 time = time,
@@ -56,7 +54,6 @@ class MeetingViewModel : ViewModel() {
                 img3 = imageUrls.getOrNull(2)
             )
 
-            // Meeting 데이터를 Firebase에 저장
             repository.saveMeeting(meeting)
         }
     }

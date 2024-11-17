@@ -30,9 +30,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 />
             <ImageView
+                android:id="@+id/btn_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_share"
+                android:paddingStart="15dp"
+                android:paddingBottom="15dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />

@@ -17,11 +17,11 @@ class ToDoRVAdapter (private val context: Context, private val todoList: List<St
             .from(context)
             .inflate(R.layout.item_to_do, parent,false)
 
-        val toDo = view.findViewById<TextView>(R.id.text_to_do).run {
+        view.findViewById<TextView>(R.id.text_to_do).apply {
             val toDoItem = todoList[position]
             text=toDoItem
         }
-        val icCheck=view.findViewById<ImageView>(R.id.check).run {
+        view.findViewById<ImageView>(R.id.check).apply {
             setOnClickListener {
                 isSelected=!isSelected
             }

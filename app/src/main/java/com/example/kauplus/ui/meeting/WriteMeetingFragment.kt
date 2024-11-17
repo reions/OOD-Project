@@ -8,13 +8,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -29,7 +29,6 @@ class WriteMeetingFragment : Fragment() {
     private var imageUris = mutableListOf<Uri?>()
     private var selectedImage = ""
 
-    // 갤러리 open
     private val requestPermissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -60,7 +59,6 @@ class WriteMeetingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 기타 초기화 코드
         (activity as MainActivity).hideMoreAndShowBack(true)
         (activity as MainActivity).hideLogoAndShowTitle(true)
         (activity as MainActivity).binding.navText.text = "회의 작성"
@@ -101,9 +99,8 @@ class WriteMeetingFragment : Fragment() {
             val title = binding.etTitle.text.toString()
             val time = binding.etTime.text.toString()
             val place = binding.etPlace.text.toString()
-            val toDoList = writeToDoRVAdapter.editList.filter { it.isNotEmpty() } // 비어 있지 않은 항목만 필터링
+            val toDoList = writeToDoRVAdapter.editList.filter { it.isNotEmpty() }
 
-            // ViewModel에 데이터 저장 요청
             viewModel.saveMeeting(title, time, place, toDoList, imageUris.filterNotNull())
             (activity as MainActivity).onBackPressed()
         }

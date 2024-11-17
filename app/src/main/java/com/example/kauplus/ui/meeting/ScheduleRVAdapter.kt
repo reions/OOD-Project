@@ -46,9 +46,6 @@ class ScheduleRVAdapter (private val meetingList: LiveData<ArrayList<Meeting>>):
             }
             binding.delete.setOnClickListener {
                 myItemClickListener.onDeleteMeeting(meeting?.id)
-                /*meeting?.id?.let { id ->
-                    (binding.root.context as? ScheduleFragment)?.viewModel?.deleteMeeting(id)
-                }*/
             }
         }
     }

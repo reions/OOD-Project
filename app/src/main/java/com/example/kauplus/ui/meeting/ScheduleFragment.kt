@@ -1,6 +1,5 @@
 package com.example.kauplus.ui.meeting
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.MainActivity
 import com.example.kauplus.R
@@ -26,7 +24,6 @@ class ScheduleFragment : Fragment() {
         (activity as MainActivity).binding.navText.text = "회의 일정"
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-
     }
 
     override fun onCreateView(
