@@ -31,49 +31,11 @@
             android:layout_marginStart="36dp"
             android:text="10/22 18:05" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_bodytext"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="22dp"
-            android:background="@drawable/gray_stroke_rectangle"
-            android:orientation="vertical"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/txt_guin2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="알고리즘 스터디 멤버 구합니다"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txt_body_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="내일 도서관 스터디룸에서 함께 알고리즘 공부할 동기 모집합니다. \n남녀 학년 상관 없으니 부담없이 참여해주시면 감사하겠습니다." />
-
-            <TextView
-                android:id="@+id/txt_time_to_meet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="\u00B7 14 : 00~15 : 00"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txt_groupspace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="\u00B7 C1 스터디룸"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,6 +60,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -124,7 +87,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/txt_put_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

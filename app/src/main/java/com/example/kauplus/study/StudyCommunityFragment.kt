@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.MainActivity
 import com.example.kauplus.databinding.FragmentStudyCommunityBinding
-import com.example.kauplus.study.PostRVAdapter.MyItemClickListener
-import com.example.kauplus.ui.meeting.ScheduleRVAdapter
 
 
 class StudyCommunityFragment : Fragment() {
@@ -17,8 +15,8 @@ class StudyCommunityFragment : Fragment() {
     private var binding : FragmentStudyCommunityBinding? = null
     private var itemlist : ArrayList<Posts> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
 
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(false)
