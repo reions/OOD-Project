@@ -12,16 +12,16 @@ import com.example.kauplus.databinding.FragmentPostDetailBinding
 // 댓글 추가하는 기능은 writePostFrangment에 interface 부분이랑 WriteMeetingFragment
 class PostDetailFragment : Fragment() {
     private var binding : FragmentPostDetailBinding ?= null
-
+    private var bodytext: Bodytext? = null
+    private var commentList: ArrayList<Comment> = arrayListOf()
 
     override fun onResume() {
         super.onResume()
 
         (activity as MainActivity).hideMoreAndShowBack(true)
-        (activity as MainActivity).hideLogoAndShowTitle(false)
+        (activity as MainActivity).hideLogoAndShowTitle(true)
         (activity as MainActivity).binding.navText.text="글화면"
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
