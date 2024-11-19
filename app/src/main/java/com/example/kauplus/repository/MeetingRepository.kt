@@ -14,8 +14,8 @@ import kotlinx.coroutines.tasks.await
 import java.util.UUID
 
 class MeetingRepository {
-    val database = Firebase.database
-    val meetingRef = database.getReference("meeting")
+    private val database = Firebase.database
+    private val meetingRef = database.getReference("meeting")
     private val storage = FirebaseStorage.getInstance().reference
     fun observeMeetings(meetings: MutableLiveData<ArrayList<Meeting>>) {
         meetingRef.addValueEventListener(object : ValueEventListener {
@@ -26,6 +26,7 @@ class MeetingRepository {
                     meeting?.let { meetingList.add(it) }
                 }
                 meetings.postValue(meetingList)
+                Log.d("Firebase", meetingList.toString())
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.e("Firebase", error.toString())

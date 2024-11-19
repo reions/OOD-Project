@@ -8,8 +8,9 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.kauplus.databinding.ActivityMainBinding
+import com.example.kauplus.facility.facilityAppFragment
+import com.example.kauplus.study.StudyCommunityFragment
 import com.example.kauplus.ui.meeting.ScheduleFragment
-import com.example.kauplus.ui.study.StudyFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding.ivMore.setOnClickListener {
             binding.mainDrawerLayout.openDrawer((GravityCompat.START))
         }
+
         binding.drLogout.setOnClickListener{
             finish()
             startActivity(intent)
@@ -45,17 +47,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun initDrawerNav(){
         binding.drCommunity.setOnClickListener{
-            addFragment(StudyFragment())
+            addFragment(StudyCommunityFragment())
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
         }
 
-      /*  binding.drFacility.setOnClickListener{
-            addFragment(FacilityFragment())
+        /* binding.drFacility.setOnClickListener{
+            addFragment(StudyCommunityFragment())
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
-        }*/
+        } */
         binding.drSchedule.setOnClickListener{
             addFragment(ScheduleFragment())
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
+        }
+        binding.drFacility.setOnClickListener {
+            addFragment(facilityAppFragment())
+            binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
+
         }
         /*binding.drLogout.setOnClickListener{
             binding.mainDrawerLayout.closeDrawer((GravityCompat.START))
@@ -106,9 +113,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun showInit() {
         val transaction = supportFragmentManager.beginTransaction()
-            .add(R.id.container_main, StudyFragment())
+            .add(R.id.container_main, StudyCommunityFragment())
         transaction.commit()
     }
 }

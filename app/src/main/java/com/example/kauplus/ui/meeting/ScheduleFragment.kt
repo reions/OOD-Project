@@ -1,6 +1,7 @@
 package com.example.kauplus.ui.meeting
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class ScheduleFragment : Fragment() {
         )
         */
         viewModel.itemSchedule.observe(viewLifecycleOwner) {
+            Log.d("Firebase 뷰모델 observe", viewModel.itemSchedule.value.toString())
            scheduleRVAdapter.notifyDataSetChanged()
         }
 

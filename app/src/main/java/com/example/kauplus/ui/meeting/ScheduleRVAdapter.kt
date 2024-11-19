@@ -1,5 +1,6 @@
 package com.example.kauplus.ui.meeting
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -51,6 +52,7 @@ class ScheduleRVAdapter (private val meetingList: LiveData<ArrayList<Meeting>>):
     }
 
     override fun onBindViewHolder(holder: ScheduleRVAdapter.NewsRVViewHolder, position: Int) {
+        Log.d("Firebase 어댑터", meetingList.value.toString())
         holder.bind(meetingList.value?.getOrNull(position))
     }
     override fun getItemViewType(position: Int): Int =position

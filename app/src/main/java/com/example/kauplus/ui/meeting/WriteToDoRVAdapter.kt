@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kauplus.R
-import com.example.kauplus.databinding.ItemMeetingBinding
 import com.example.kauplus.databinding.ItemWriteToDoBinding
 
 class WriteToDoRVAdapter (itemList: MutableList<String>): RecyclerView.Adapter<WriteToDoRVAdapter.WriteToDoRVViewHolder>() {

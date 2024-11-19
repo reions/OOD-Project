@@ -1,6 +1,7 @@
 package com.example.kauplus.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,7 @@ class MeetingViewModel : ViewModel() {
 
     init {
         repository.observeMeetings(_itemSchedule)
+        Log.d("Firebase 초기화", itemSchedule.value.toString())
     }
 
     fun fetchMeeting(meetingId: String) {
