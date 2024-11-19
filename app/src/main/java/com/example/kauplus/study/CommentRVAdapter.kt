@@ -26,6 +26,11 @@ class CommentRVAdapter(private var commentList: List<Comment>) : RecyclerView.Ad
         holder.commentWriter.text = currentComment.comment_writer
     }
 
+    fun updateComments(newComments: List<Comment>) {
+        commentList = newComments
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return commentList.size
     }

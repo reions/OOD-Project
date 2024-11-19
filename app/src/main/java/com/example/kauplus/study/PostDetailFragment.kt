@@ -4,57 +4,92 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.MainActivity
 import com.example.kauplus.databinding.FragmentPostDetailBinding
 
-// 댓글 추가하는 기능은 writePostFrangment에 interface 부분이랑 WriteMeetingFragment
 class PostDetailFragment : Fragment() {
-    private var binding : FragmentPostDetailBinding ?= null
-    private var bodytext: Bodytext? = null
-    private var commentList: ArrayList<Comment> = arrayListOf()
+
+    private var binding: FragmentPostDetailBinding? = null
+    private val viewModel: CommunityViewModel by activityViewModels()
+    private lateinit var postId: String
 
     override fun onResume() {
         super.onResume()
-
         (activity as MainActivity).hideMoreAndShowBack(true)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-        (activity as MainActivity).binding.navText.text="글화면"
+        (activity as MainActivity).binding.navText.text = "글화면"
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        postId = arguments?.getString("postId") ?: ""
+        viewModel.selectPost(postId)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPostDetailBinding.inflate(inflater, container, false)
-        val comments = listOf(
-            Comment("멤버가 합이 잘 맞을 경우 정기 스터디 진행할 계획이 있습니다.", "10/22 18:05", "helloworld!08"),
-            Comment("아직도 구하나요?", "10/22 18:12", "송동호")
-        )
 
-        val commentAdapter = CommentRVAdapter(comments)
-        binding?.rvComment?.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = commentAdapter
+
+
+        val bodytextAdapter = BodytextRVAdapter(emptyList()) { selectedBodytext ->
+            viewModel.setSelectedBodytext(selectedBodytext)
         }
-        val bodytexts = listOf(
-            Bodytext("알고리즘 스터디 멤버 구합니다", "내일 도서관 스터디룸에서 함께 알고리즘 공부할 동기 모집합니다. \n남녀 학년 상관 없으니 부담없이 참여해주시면 감사하겠습니다.",
-                "\u00B7 14 : 00~15 : 00", "\u00B7 C1 스터디룸"),
-            Bodytext("러닝 크루 모집", "같이 학교 운동장에서 러닝 하실 크루원들을 모집합니다. \n남녀, 학년 상관없고 잘뛰지 못해도 괜찮으니 많은 참여 바랍니다.",
-                "\u00B7 14 : 00~15 : 00", "\u00B7 운동장")
-        )
 
-        val bodytextAdapter = BodytextRVAdapter(bodytexts)
         binding?.rvBodytext?.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = bodytextAdapter
         }
 
+        viewModel.selectedBodytext.observe(viewLifecycleOwner) { bodytext ->
+            bodytextAdapter.updateBodytexts(listOf(bodytext))
+        }
+
+        // Bodytext 데이터 반영
+        /*viewModel.selectedBodytext.observe(viewLifecycleOwner) { bodytext ->
+            bodytext?.let {
+                binding?.txtInpostTitle?.text = it.in_post_title
+                binding?.txtBodyText?.text = it.body_text
+                binding?.txtTimeToMeet?.text = it.time_to_meet
+                binding?.txtGroupspace?.text = it.group_space
+            }
+        }*/
+
+        // 댓글 RecyclerView 설정
+        val commentAdapter = CommentRVAdapter(emptyList())
+        binding?.rvComment?.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = commentAdapter
+        }
+
+        viewModel.comments.observe(viewLifecycleOwner) { comments ->
+            commentAdapter.updateComments(comments)
+        }
+
+        // 댓글 전송 버튼 클릭 이벤트
+        binding?.btnSend?.setOnClickListener {
+            val commentText = binding?.etCommentInput?.text.toString()
+            if (commentText.isNotBlank()) {
+                val newComment = Comment(commentText, "11/17 12:30", "현재 사용자")
+                viewModel.addComment(postId, newComment)
+                binding?.etCommentInput?.text?.clear() // 입력 필드 초기화
+                Toast.makeText(context, "댓글이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return binding?.root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
-
 }
