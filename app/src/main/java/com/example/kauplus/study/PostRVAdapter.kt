@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.databinding.ItemPostsBinding
-import com.example.kauplus.ui.meeting.ScheduleRVAdapter
 
 class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVAdapter.PostRVViewHolder>() {
 
@@ -44,7 +43,7 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         val time=binding.txtTime
         val place=binding.txtSpace
         val participant = binding.txtParticipant
-
+        // 커밋을 위한거
     }
 
     override fun onBindViewHolder(holder: PostRVAdapter.PostRVViewHolder, position: Int) {

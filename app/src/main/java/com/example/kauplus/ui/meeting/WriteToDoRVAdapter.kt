@@ -3,8 +3,6 @@ package com.example.kauplus.ui.meeting
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kauplus.R
-import com.example.kauplus.databinding.ItemMeetingBinding
 import com.example.kauplus.databinding.ItemWriteToDoBinding
 
 class WriteToDoRVAdapter (itemList: MutableList<String>): RecyclerView.Adapter<WriteToDoRVAdapter.WriteToDoRVViewHolder>() {
