@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun showInit() {
         val transaction = supportFragmentManager.beginTransaction()
             .add(R.id.container_main, StudyCommunityFragment())

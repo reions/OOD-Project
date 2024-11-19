@@ -43,7 +43,7 @@ class PostRVAdapter(itemList: List<Posts>) : RecyclerView.Adapter<PostRVAdapter.
         val time=binding.txtTime
         val place=binding.txtSpace
         val participant = binding.txtParticipant
-
+        // 커밋을 위한거
     }
 
     override fun onBindViewHolder(holder: PostRVViewHolder, position: Int) {
