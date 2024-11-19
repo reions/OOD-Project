@@ -43,7 +43,7 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         val time=binding.txtTime
         val place=binding.txtSpace
         val participant = binding.txtParticipant
-
+        // 커밋을 위한거
     }
 
     override fun onBindViewHolder(holder: PostRVAdapter.PostRVViewHolder, position: Int) {
