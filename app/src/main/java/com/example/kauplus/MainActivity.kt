@@ -8,6 +8,8 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.kauplus.databinding.ActivityMainBinding
+import com.example.kauplus.facility.facilityAppFragment
+import com.example.kauplus.study.StudyCommunityFragment
 import com.example.kauplus.ui.meeting.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivity() {
             }
 
     }
+
 
     private fun showInit() {
         val transaction = supportFragmentManager.beginTransaction()

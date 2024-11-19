@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.MainActivity
 import com.example.kauplus.databinding.FragmentStudyCommunityBinding
-import com.example.kauplus.study.PostRVAdapter.MyItemClickListener
-import com.example.kauplus.ui.meeting.ScheduleRVAdapter
 
 
 class StudyCommunityFragment : Fragment() {
