@@ -52,7 +52,6 @@ class ScheduleRVAdapter (private val meetingList: LiveData<ArrayList<Meeting>>):
     }
 
     override fun onBindViewHolder(holder: ScheduleRVAdapter.NewsRVViewHolder, position: Int) {
-        Log.d("Firebase 어댑터", meetingList.value.toString())
         holder.bind(meetingList.value?.getOrNull(position))
     }
     override fun getItemViewType(position: Int): Int =position

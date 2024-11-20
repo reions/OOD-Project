@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,7 @@ import com.example.kauplus.viewmodel.MeetingViewModel
 class WriteMeetingFragment : Fragment() {
     private lateinit var binding: FragmentWriteMeetingBinding
     val viewModel: MeetingViewModel by activityViewModels()
-    private var imageUris = mutableListOf<Uri?>()
+    private var imageUris = mutableListOf<Uri?>(null, null, null)
     private var selectedImage = ""
 
     private val requestPermissionLauncher: ActivityResultLauncher<String> =
@@ -40,9 +41,18 @@ class WriteMeetingFragment : Fragment() {
             result.data?.data?.let { uri ->
                 context?.let { context ->
                     val targetImageView = when (selectedImage) {
-                        "img1" -> binding.imgMeeting1
-                        "img2" -> binding.imgMeeting2
-                        "img3" -> binding.imgMeeting3
+                        "img1" -> {
+                            imageUris[0] = uri
+                            binding.imgMeeting1
+                        }
+                        "img2" -> {
+                            imageUris[1] = uri
+                            binding.imgMeeting2
+                        }
+                        "img3" -> {
+                            imageUris[2] = uri
+                            binding.imgMeeting3
+                        }
                         else -> null
                     }
                     targetImageView?.let {
@@ -100,8 +110,8 @@ class WriteMeetingFragment : Fragment() {
             val time = binding.etTime.text.toString()
             val place = binding.etPlace.text.toString()
             val toDoList = writeToDoRVAdapter.editList.filter { it.isNotEmpty() }
-
-            viewModel.saveMeeting(title, time, place, toDoList, imageUris.filterNotNull())
+            Log.d("이미지", imageUris.toString())
+            viewModel.saveMeeting(title, time, place, toDoList, imageUris)
             (activity as MainActivity).onBackPressed()
         }
 
