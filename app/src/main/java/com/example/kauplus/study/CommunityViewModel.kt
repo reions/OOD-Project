@@ -68,6 +68,9 @@ class CommunityViewModel : ViewModel() {
 
     fun addFirebaseComment(comment: Comment){
         commentFirebaseRepository.addFirebaseComment(comment)
+        commentFirebaseRepository.comments.observeForever { firebaseComments ->
+            _comments.value = firebaseComments
+        }
     }
 
     /*fun deleteComment(comment: Comment) {
@@ -85,6 +88,6 @@ class CommunityViewModel : ViewModel() {
         val updatedComments = commentMap[postId]?.toMutableList() ?: mutableListOf()
         updatedComments.add(newComment)
         commentMap[postId] = updatedComments // 갱신된 리스트 설정
-        _comments.value = updatedComments // LiveData 갱신
+        _comments.value = commentMap[postId] // LiveData 갱신
     }
 }
