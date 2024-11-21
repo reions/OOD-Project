@@ -73,9 +73,7 @@ class PostDetailFragment : Fragment() {
                 val currentTime = SimpleDateFormat("MM/dd HH:mm", Locale.getDefault()).format(Date())
                 val newComment = Comment(commentText, currentTime, "사용자")
                 viewModel.addComment(postId, newComment)
-                //viewModel.addFirebaseComment(newComment)
-                //dismiss()
-                //(activity as? MainActivity)?.addFragment(PostDetailFragment())
+                viewModel.addFirebaseComment(newComment)
                 binding?.etCommentInput?.text?.clear() // 입력 필드 초기화
                 Toast.makeText(context, "댓글이 추가되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
