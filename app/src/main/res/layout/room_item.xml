@@ -5,7 +5,7 @@
     android:id="@+id/res_cycle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".item_res_timeFragment">
+    tools:context=".facility.item_res_timeFragment">
 
     <LinearLayout
         android:layout_width="110dp"

@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class FirebaseRepository {
+class FacilityFirebaseRepository {
     private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("reservations")
 
     private val _reservations = MutableLiveData<List<Reservation>>()

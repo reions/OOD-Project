@@ -7,29 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".facility.fragCencle" >
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="153dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="155dp"
-        android:text="내 예약"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_Class"
         android:layout_width="match_parent"
         android:layout_height="306dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="108dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

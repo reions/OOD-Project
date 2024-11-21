@@ -39,11 +39,13 @@ class fragCencle : Fragment() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
+        (activity as MainActivity).binding.navText.text = "내 예약"
         (activity as MainActivity).hideMoreAndShowBack(true)
-        (activity as MainActivity).hideLogoAndShowTitle(false)
-        (activity as MainActivity).binding.navText.text = ""
+        (activity as MainActivity).hideLogoAndShowTitle(true)
+
     }
 
     override fun onDestroyView() {
