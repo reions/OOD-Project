@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.kauplus.facility.Reservation
-import com.example.kauplus.repository.FirebaseRepository
+import com.example.kauplus.repository.FacilityFirebaseRepository
 
 class ReservationViewModel : ViewModel() {
-    private val firebaseRepository = FirebaseRepository()
+    private val firebaseRepository = FacilityFirebaseRepository()
     private val _reservations = MutableLiveData<MutableList<Reservation>>(mutableListOf())
     val reservations: LiveData<MutableList<Reservation>> get() = _reservations
 
