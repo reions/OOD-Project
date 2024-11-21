@@ -21,7 +21,6 @@ class MeetingViewModel : ViewModel() {
 
     init {
         repository.observeMeetings(_itemSchedule)
-        Log.d("Firebase 초기화", itemSchedule.value.toString())
     }
 
     fun fetchMeeting(meetingId: String) {
@@ -36,24 +35,22 @@ class MeetingViewModel : ViewModel() {
         time: String,
         place: String,
         toDoList: List<String>,
-        imageUris: List<Uri>
+        imageUris: List<Uri?>
     ) {
         viewModelScope.launch {
-            val imageUrls = mutableListOf<String?>()
-
-            imageUris.forEach { uri ->
+            /*imageUris.forEach { uri ->
                 val url = repository.uploadImage(uri)
                 imageUrls.add(url)
-            }
+            }*/
 
             val meeting = Meeting(
                 title = title,
                 time = time,
                 place = place,
                 toDo = toDoList,
-                img1 = imageUrls.getOrNull(0),
-                img2 = imageUrls.getOrNull(1),
-                img3 = imageUrls.getOrNull(2)
+                img1 = imageUris.getOrNull(0).toString(),
+                img2 = imageUris.getOrNull(1).toString(),
+                img3 = imageUris.getOrNull(2).toString()
             )
 
             repository.saveMeeting(meeting)

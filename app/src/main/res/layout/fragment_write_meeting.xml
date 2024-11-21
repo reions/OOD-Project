@@ -136,7 +136,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:cardElevation="0dp"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="20dp"
                 >
                 <ImageView
                     android:id="@+id/img_meeting1"
@@ -154,7 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:cardElevation="0dp"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="20dp"
                 >
                 <ImageView
                     android:id="@+id/img_meeting2"
@@ -171,7 +171,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:cardElevation="0dp"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="20dp"
                 >
                 <ImageView
                     android:id="@+id/img_meeting3"

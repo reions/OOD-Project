@@ -2,6 +2,7 @@ package com.example.kauplus.ui.meeting
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,10 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                 binding.title.text = it.title
                 binding.time.text = it.time
                 binding.place.text = it.place
+
+                Log.d("이미지", it.img1.toString())
+                Log.d("이미지", it.img2.toString())
+                Log.d("이미지", it.img3.toString())
 
                 Glide.with(this)
                     .load(it.img1)

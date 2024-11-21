@@ -1,5 +1,7 @@
 package com.example.kauplus.ui.meeting
 
+import android.net.Uri
+
 data class Meeting(
     var id:String?=null,
     val title:String="",
