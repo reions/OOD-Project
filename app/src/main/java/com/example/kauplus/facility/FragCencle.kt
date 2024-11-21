@@ -44,7 +44,7 @@ class fragCencle : Fragment() {
         super.onResume()
         (activity as MainActivity).binding.navText.text = "내 예약"
         (activity as MainActivity).hideMoreAndShowBack(true)
-        (activity as MainActivity).hideLogoAndShowTitle(false)
+        (activity as MainActivity).hideLogoAndShowTitle(true)
 
     }
 
