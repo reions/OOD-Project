@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.databinding.ItemPostsBinding
 
-class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVAdapter.PostRVViewHolder>() {
+class PostRVAdapter(itemList: List<Posts>) : RecyclerView.Adapter<PostRVAdapter.PostRVViewHolder>() {
 
-    var postList: MutableList<Posts> = itemList
+    var postList: MutableList<Posts> = itemList as MutableList<Posts>
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,7 +31,7 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         fun onItemClick(position: Int)
 
     }
-    private lateinit var myItemClickListener: MyItemClickListener
+    private var myItemClickListener: MyItemClickListener? = null
 
     fun setMyItemClickListener(itemClickListener: MyItemClickListener){
         myItemClickListener=itemClickListener
@@ -46,13 +46,14 @@ class PostRVAdapter(itemList: MutableList<Posts>) : RecyclerView.Adapter<PostRVA
         // 커밋을 위한거
     }
 
-    override fun onBindViewHolder(holder: PostRVAdapter.PostRVViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostRVViewHolder, position: Int) {
+        val posts = postList[position]
         holder.title.text = postList[position].posting_title
         holder.time.text = postList[position].time
         holder.place.text = postList[position].space
         holder.participant.text = postList[position].participant
         holder.itemView.setOnClickListener{
-            myItemClickListener.onItemClick(position)
+            myItemClickListener?.onItemClick(position)
         }
 
     }

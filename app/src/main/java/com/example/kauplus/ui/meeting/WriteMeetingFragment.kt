@@ -15,18 +15,20 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.kauplus.MainActivity
 import com.example.kauplus.R
 import com.example.kauplus.databinding.FragmentWriteMeetingBinding
+import com.example.kauplus.viewmodel.MeetingViewModel
 
 class WriteMeetingFragment : Fragment() {
     private lateinit var binding: FragmentWriteMeetingBinding
-    private var imageUri: Uri? = null
+    val viewModel: MeetingViewModel by activityViewModels()
+    private var imageUris = mutableListOf<Uri?>()
     private var selectedImage = ""
 
-    // 갤러리 open
     private val requestPermissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -36,7 +38,6 @@ class WriteMeetingFragment : Fragment() {
     private var pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.data?.let { uri ->
-                imageUri = uri
                 context?.let { context ->
                     val targetImageView = when (selectedImage) {
                         "img1" -> binding.imgMeeting1
@@ -46,7 +47,7 @@ class WriteMeetingFragment : Fragment() {
                     }
                     targetImageView?.let {
                         Glide.with(context)
-                            .load(imageUri)
+                            .load(uri)
                             .placeholder(R.drawable.img_bg)
                             .error(R.drawable.img_bg)
                             .into(it)
@@ -58,7 +59,6 @@ class WriteMeetingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 기타 초기화 코드
         (activity as MainActivity).hideMoreAndShowBack(true)
         (activity as MainActivity).hideLogoAndShowTitle(true)
         (activity as MainActivity).binding.navText.text = "회의 작성"
@@ -69,7 +69,11 @@ class WriteMeetingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWriteMeetingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val writeToDoRVAdapter = WriteToDoRVAdapter(arrayListOf())
         binding.rvWriteToDo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvWriteToDo.adapter = writeToDoRVAdapter
@@ -80,21 +84,31 @@ class WriteMeetingFragment : Fragment() {
         }
 
         binding.imgMeeting1.setOnClickListener {
-            selectedImage = "img1"
-            checkPermission()
+            selectImage("img1")
         }
 
         binding.imgMeeting2.setOnClickListener {
-            selectedImage = "img2"
-            checkPermission()
+            selectImage("img2")
         }
 
         binding.imgMeeting3.setOnClickListener {
-            selectedImage = "img3"
-            checkPermission()
+            selectImage("img3")
         }
 
-        return binding.root
+        binding.btnWriteFinish.setOnClickListener {
+            val title = binding.etTitle.text.toString()
+            val time = binding.etTime.text.toString()
+            val place = binding.etPlace.text.toString()
+            val toDoList = writeToDoRVAdapter.editList.filter { it.isNotEmpty() }
+
+            viewModel.saveMeeting(title, time, place, toDoList, imageUris.filterNotNull())
+            (activity as MainActivity).onBackPressed()
+        }
+
+    }
+    private fun selectImage(selectedImg:String) {
+        selectedImage = selectedImg
+        checkPermission()
     }
 
     private fun checkPermission() {
