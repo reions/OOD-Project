@@ -11,14 +11,19 @@ class CommunityViewModel : ViewModel() {
     private val bodytextMap = mutableMapOf<String, Bodytext>()
     private val commentMap = mutableMapOf<String, List<Comment>>()
 
-    private val _selectedBodytext = MutableLiveData<Bodytext>()
-    val selectedBodytext: LiveData<Bodytext> get() = _selectedBodytext
+    private val _selectedBodytext = MutableLiveData<Bodytext?>()
+    val selectedBodytext: LiveData<Bodytext?> get() = _selectedBodytext
 
     private val _comments = MutableLiveData<List<Comment>>()
     val comments: LiveData<List<Comment>> get() = _comments
 
+    private val commentFirebaseRepository = CommentFirebaseRepository()
+
     init {
         // 초기 데이터 설정
+        commentFirebaseRepository.comments.observeForever{ commentFirebaseRepository ->
+            _comments.value = commentFirebaseRepository.toMutableList()
+        }
         val initialPosts = listOf(
             Posts("1","알고리즘 스터디 멤버 구합니다.", "14 : 00 ~ 15 : 00", "C1 스터디룸", "3/5"),
             Posts("2","러닝 크루 모집", "14 : 00 ~ 15 : 00", "운동장", "2/5")
@@ -52,17 +57,28 @@ class CommunityViewModel : ViewModel() {
     fun selectPost(postId: String) {
         val bodytext = bodytextMap[postId]
         if (bodytext != null) {
-            _selectedBodytext.value = bodytext!!
+            _selectedBodytext.value = bodytext
             _comments.value = commentMap[postId] ?: emptyList()
-        } else {
-            // 기본값 설정 또는 오류 처리
-            _selectedBodytext.value = Bodytext("제목 없음", "내용 없음", "", "")
-            _comments.value = emptyList()
         }
     }
+
     fun setSelectedBodytext(bodytext: Bodytext) {
         _selectedBodytext.value = bodytext
     }
+
+    fun addFirebaseComment(comment: Comment){
+        commentFirebaseRepository.addFirebaseComment(comment)
+    }
+
+    /*fun deleteComment(comment: Comment) {
+        val firebasekey = comment.firebaseKey
+        if (firebasekey != null){
+            commentFirebaseRepository.deleteCommentByKey(firebasekey)
+        }
+        val updatedList = _comments.value ?: mutableListOf()
+        updatedList.remove(comment)
+        _comments.value = updatedList
+    }*/
 
 
     fun addComment(postId: String, newComment: Comment) {

@@ -10,6 +10,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.MainActivity
 import com.example.kauplus.databinding.FragmentPostDetailBinding
+import com.example.kauplus.facility.confirmResFragment
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class PostDetailFragment : Fragment() {
 
@@ -21,7 +25,7 @@ class PostDetailFragment : Fragment() {
         super.onResume()
         (activity as MainActivity).hideMoreAndShowBack(true)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-        (activity as MainActivity).binding.navText.text = "글화면"
+        (activity as MainActivity).binding.navText.text = "작성글"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,16 +55,6 @@ class PostDetailFragment : Fragment() {
             bodytextAdapter.updateBodytexts(listOf(bodytext))
         }
 
-        // Bodytext 데이터 반영
-        /*viewModel.selectedBodytext.observe(viewLifecycleOwner) { bodytext ->
-            bodytext?.let {
-                binding?.txtInpostTitle?.text = it.in_post_title
-                binding?.txtBodyText?.text = it.body_text
-                binding?.txtTimeToMeet?.text = it.time_to_meet
-                binding?.txtGroupspace?.text = it.group_space
-            }
-        }*/
-
         // 댓글 RecyclerView 설정
         val commentAdapter = CommentRVAdapter(emptyList())
         binding?.rvComment?.apply {
@@ -76,14 +70,25 @@ class PostDetailFragment : Fragment() {
         binding?.btnSend?.setOnClickListener {
             val commentText = binding?.etCommentInput?.text.toString()
             if (commentText.isNotBlank()) {
-                val newComment = Comment(commentText, "11/17 12:30", "현재 사용자")
+                val currentTime = SimpleDateFormat("MM/dd HH:mm", Locale.getDefault()).format(Date())
+                val newComment = Comment(commentText, currentTime, "사용자")
                 viewModel.addComment(postId, newComment)
+                //viewModel.addFirebaseComment(newComment)
+                //dismiss()
+                //(activity as? MainActivity)?.addFragment(PostDetailFragment())
                 binding?.etCommentInput?.text?.clear() // 입력 필드 초기화
                 Toast.makeText(context, "댓글이 추가되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
+
+        /*binding?.txtJoin?.setOnClickListener {
+            val studyAccept = StudyAcceptFragment()
+            StudyAcceptFragment.show(parentFragmentManager, "studyAcceptFragment")
+            dismiss()
+        }*/
+
 
         return binding?.root
     }
