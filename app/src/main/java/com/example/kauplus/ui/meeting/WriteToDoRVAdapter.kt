@@ -2,6 +2,7 @@ package com.example.kauplus.ui.meeting
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.databinding.ItemWriteToDoBinding
 
@@ -27,6 +28,9 @@ class WriteToDoRVAdapter (itemList: MutableList<String>): RecyclerView.Adapter<W
 
     override fun onBindViewHolder(holder: WriteToDoRVViewHolder, position: Int) {
         holder.edit.setText(editList[position])
+        holder.edit.addTextChangedListener {
+            editList[position] = it.toString()
+        }
         holder.itemView.setOnClickListener {
             myItemClickListener.onItemClick(position)
         }

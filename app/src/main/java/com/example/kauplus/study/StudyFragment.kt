@@ -1,10 +1,11 @@
-package com.example.kauplus
+package com.example.kauplus.study
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.kauplus.MainActivity
 import com.example.kauplus.databinding.FragmentStudyBinding
 
 class StudyFragment : Fragment() {
