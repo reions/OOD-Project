@@ -88,6 +88,7 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                 }
                 binding.btnClose.setOnClickListener {
                     viewModel.closeMeeting(meetingId)
+                    dismiss()
                 }
             }
         }
