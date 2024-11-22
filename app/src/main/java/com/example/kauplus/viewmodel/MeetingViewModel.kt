@@ -13,14 +13,23 @@ import kotlinx.coroutines.launch
 class MeetingViewModel : ViewModel() {
     private val repository = MeetingRepository()
 
-    private val _itemSchedule=MutableLiveData<ArrayList<Meeting>>()
-    val itemSchedule : LiveData<ArrayList<Meeting>> = _itemSchedule
+    private val _openedSchedule=MutableLiveData<ArrayList<Meeting>>()
+    val openedSchedule : LiveData<ArrayList<Meeting>> = _openedSchedule
+
+    private val _closedSchedule=MutableLiveData<ArrayList<Meeting>>()
+    val closedSchedule : LiveData<ArrayList<Meeting>> = _closedSchedule
 
     private val _selectedMeeting = MutableLiveData<Meeting>()
     val selectedMeeting: LiveData<Meeting> = _selectedMeeting
 
     init {
-        repository.observeMeetings(_itemSchedule)
+        repository.observeMeetings(_openedSchedule,_closedSchedule)
+    }
+
+    fun closeMeeting(meetingId: String) {
+        viewModelScope.launch {
+            repository.fetchCloseMeeting(meetingId)
+        }
     }
 
     fun fetchMeeting(meetingId: String) {
@@ -38,11 +47,6 @@ class MeetingViewModel : ViewModel() {
         imageUris: List<Uri?>
     ) {
         viewModelScope.launch {
-            /*imageUris.forEach { uri ->
-                val url = repository.uploadImage(uri)
-                imageUrls.add(url)
-            }*/
-
             val meeting = Meeting(
                 title = title,
                 time = time,

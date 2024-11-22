@@ -1,7 +1,6 @@
 package com.example.kauplus.ui.meeting
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,8 +37,9 @@ class ScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = binding.rvMeeting
-        val scheduleRVAdapter = ScheduleRVAdapter(viewModel.itemSchedule)
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val scheduleRVAdapter = ScheduleRVAdapter(viewModel.openedSchedule)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = scheduleRVAdapter
         /*
         itemList = arrayListOf(
@@ -47,15 +47,15 @@ class ScheduleFragment : Fragment() {
             Meeting("산학 2주차 회의", "13:00~14:00", "전자관 413호")
         )
         */
-        viewModel.itemSchedule.observe(viewLifecycleOwner) {
-            Log.d("Firebase 뷰모델 observe", viewModel.itemSchedule.value.toString())
-           scheduleRVAdapter.notifyDataSetChanged()
+
+        viewModel.closedSchedule.observe(viewLifecycleOwner) {
+            scheduleRVAdapter.notifyDataSetChanged()
         }
 
         scheduleRVAdapter.setMyItemClickListener(object : ScheduleRVAdapter.MyItemClickListener {
 
             override fun onItemClick(meetingId: String?) {
-                if (meetingId!=null){
+                if (meetingId != null) {
                     val bottomSheet = MeetingDetailBottomSheet.newInstance(meetingId)
                     bottomSheet.show(parentFragmentManager, MeetingDetailBottomSheet().tag)
                 }
@@ -81,6 +81,8 @@ class ScheduleFragment : Fragment() {
                 )
             )
             binding.btnWriteMeeting.visibility = View.VISIBLE
+            scheduleRVAdapter.updateList(viewModel.openedSchedule)
+
         }
         binding.textClosedMeeting.setOnClickListener {
             binding.textReservedMeeting.setTextColor(
@@ -96,6 +98,7 @@ class ScheduleFragment : Fragment() {
                 )
             )
             binding.btnWriteMeeting.visibility = View.GONE
+            scheduleRVAdapter.updateList(viewModel.closedSchedule)
         }
 
         binding.btnWriteMeeting.setOnClickListener {

@@ -10,5 +10,6 @@ data class Meeting(
     val toDo:List<String> = arrayListOf(),
     val img1:String?=null,
     val img2:String?=null,
-    val img3:String?=null
+    val img3:String?=null,
+    val opened:Boolean=true
 )

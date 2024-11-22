@@ -86,6 +86,9 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                     val chooserTitle = "친구에게 공유하기"
                     startActivity(Intent.createChooser(intent, chooserTitle))
                 }
+                binding.btnClose.setOnClickListener {
+                    viewModel.closeMeeting(meetingId)
+                }
             }
         }
 
