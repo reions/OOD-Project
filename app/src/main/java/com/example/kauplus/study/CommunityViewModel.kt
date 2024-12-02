@@ -1,4 +1,4 @@
-package com.example.kauplus.study
+/*package com.example.kauplus.study
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -56,38 +56,31 @@ class CommunityViewModel : ViewModel() {
 
     fun selectPost(postId: String) {
         val bodytext = bodytextMap[postId]
-        if (bodytext != null) {
-            _selectedBodytext.value = bodytext
+        _selectedBodytext.value = bodytext
+
+        //_comments.value = commentMap[postId]
+        // 댓글을 commentMap에서 가져오되, 이미 LiveData에 값이 있는 경우 덮어쓰지 않음
+        if (_comments.value.isNullOrEmpty()) {
             _comments.value = commentMap[postId] ?: emptyList()
         }
     }
+
 
     fun setSelectedBodytext(bodytext: Bodytext) {
         _selectedBodytext.value = bodytext
     }
 
-    fun addFirebaseComment(comment: Comment){
-        commentFirebaseRepository.addFirebaseComment(comment)
-        commentFirebaseRepository.comments.observeForever { firebaseComments ->
-            _comments.value = firebaseComments
-        }
-    }
 
-    /*fun deleteComment(comment: Comment) {
-        val firebasekey = comment.firebaseKey
-        if (firebasekey != null){
-            commentFirebaseRepository.deleteCommentByKey(firebasekey)
-        }
-        val updatedList = _comments.value ?: mutableListOf()
-        updatedList.remove(comment)
-        _comments.value = updatedList
-    }*/
 
 
     fun addComment(postId: String, newComment: Comment) {
-        val updatedComments = commentMap[postId]?.toMutableList() ?: mutableListOf()
-        updatedComments.add(newComment)
+        val updatedComments = (commentMap[postId]?.toMutableList() ?: mutableListOf()).apply {
+            add(newComment)
+        }
         commentMap[postId] = updatedComments // 갱신된 리스트 설정
         _comments.value = commentMap[postId] // LiveData 갱신
+
+        commentFirebaseRepository.addFirebaseComment(newComment)
+
     }
-}
+}*/

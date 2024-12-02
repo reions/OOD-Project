@@ -1,5 +1,6 @@
 package com.example.kauplus.study
 
+import PostViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import com.example.kauplus.databinding.FragmentStudyCommunityBinding
 class StudyCommunityFragment : Fragment() {
 
     private var binding : FragmentStudyCommunityBinding? = null
-    private val viewModel: CommunityViewModel by activityViewModels()
+    private val viewModel: PostViewModel by activityViewModels()
 
     override fun onResume() {
         super.onResume()
@@ -46,7 +47,7 @@ class StudyCommunityFragment : Fragment() {
                             putString("postId", postId)
                         }
                     }
-                    viewModel.selectPost(postId)
+                    viewModel.selectPost("postId")
                     (activity as MainActivity).addFragment(fragment)
                 }
             })

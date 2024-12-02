@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.databinding.ItemBodytextBinding
 
 class BodytextRVAdapter(
-    private var bodytextList: List<Bodytext>,
+    private var bodytextList: List<Bodytext> = emptyList(),
     private val onItemClicked: (Bodytext) -> Unit // 아이템 클릭 리스너
 ) : RecyclerView.Adapter<BodytextRVAdapter.BodytextViewHolder>() {
 
@@ -33,7 +33,7 @@ class BodytextRVAdapter(
         return BodytextViewHolder(binding)
     }
     fun updateBodytexts(newBodytexts: List<Bodytext?>) {
-        bodytextList = newBodytexts as List<Bodytext>
+        bodytextList = newBodytexts.filterNotNull() // null 값을 필터링
         notifyDataSetChanged() // RecyclerView를 갱신
     }
 

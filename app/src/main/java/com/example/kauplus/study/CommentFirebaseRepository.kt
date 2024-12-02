@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
+/*
 class CommentFirebaseRepository {
     private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("comment")
 
@@ -40,4 +40,4 @@ class CommentFirebaseRepository {
     fun deleteCommentByKey(commentKey: String) {
         database.child(commentKey).removeValue()
     }
-}
+}*/
