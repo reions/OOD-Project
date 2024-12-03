@@ -16,17 +16,26 @@ import java.util.UUID
 class MeetingRepository {
     private val database = Firebase.database
     private val meetingRef = database.getReference("meeting")
-    private val storage = FirebaseStorage.getInstance().reference
-    fun observeMeetings(meetings: MutableLiveData<ArrayList<Meeting>>) {
+    fun observeMeetings(openedMeetings: MutableLiveData<ArrayList<Meeting>>,closedMeetings: MutableLiveData<ArrayList<Meeting>>) {
         meetingRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val meetingList = ArrayList<Meeting>()
+                val openList = ArrayList<Meeting>()
+                val closeList = ArrayList<Meeting>()
                 for (data in snapshot.children) {
                     val meeting = data.getValue(Meeting::class.java)
-                    meeting?.let { meetingList.add(it) }
+                    meeting?.let {
+                        if (meeting.opened){
+                            openList.add(it)
+                        }
+                        else {
+                            closeList.add(it)
+                        }
+                    }
                 }
-                meetings.postValue(meetingList)
-                Log.d("Firebase", meetingList.toString())
+                openedMeetings.postValue(openList)
+                closedMeetings.postValue(closeList)
+                Log.d("Firebase", openedMeetings.toString())
+                Log.d("Firebase", closedMeetings.toString())
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.e("Firebase", error.toString())
@@ -46,15 +55,21 @@ class MeetingRepository {
         }
     }
 
+    suspend fun fetchCloseMeeting(meetingId: String): Boolean {
+        return try {
+            val meetingToUpdate = meetingRef.child(meetingId)
+            meetingToUpdate.child("opened").setValue(false).await()
+            true
+        } catch (e: Exception) {
+            Log.e("Firebase", "회의 업데이트 실패 $meetingId: ${e.message}")
+            false
+        }
+    }
+
     fun deleteMeeting(meetingId: String?) {
         if (meetingId!=null){
             meetingRef.child(meetingId).removeValue()
         }
-    }
-
-    suspend fun uploadImage(imageUri: Uri): String {
-        val imageRef = storage.child("meetings/${UUID.randomUUID()}.jpg")
-        return imageRef.putFile(imageUri).await().storage.downloadUrl.await().toString()
     }
 
     suspend fun getMeetingById(meetingId: String): Meeting? {

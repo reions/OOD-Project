@@ -39,8 +39,8 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                 val toDo=it.toDo
 
                 binding.title.text = it.title
-                binding.time.text = it.time
-                binding.place.text = it.place
+                binding.time.text = "\u2022 ${it.time}"
+                binding.place.text = "\u2022 ${it.place}"
 
                 Log.d("이미지", it.img1.toString())
                 Log.d("이미지", it.img2.toString())
@@ -85,6 +85,10 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                     intent.putExtra(Intent.EXTRA_TEXT, content)
                     val chooserTitle = "친구에게 공유하기"
                     startActivity(Intent.createChooser(intent, chooserTitle))
+                }
+                binding.btnClose.setOnClickListener {
+                    viewModel.closeMeeting(meetingId)
+                    dismiss()
                 }
             }
         }

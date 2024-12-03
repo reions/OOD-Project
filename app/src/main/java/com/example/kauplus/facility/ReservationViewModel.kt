@@ -8,12 +8,13 @@ import com.example.kauplus.repository.FacilityFirebaseRepository
 
 class ReservationViewModel : ViewModel() {
     private val firebaseRepository = FacilityFirebaseRepository()
-    private val _reservations = MutableLiveData<MutableList<Reservation>>(mutableListOf())
-    val reservations: LiveData<MutableList<Reservation>> get() = _reservations
+    private val _reservations = MutableLiveData<Map<String, MutableList<Reservation>>>(mutableMapOf())
+    val reservations: LiveData<Map<String, MutableList<Reservation>>> get() = _reservations
 
     init {
+        // Firebase와 동기화
         firebaseRepository.reservations.observeForever { firebaseReservations ->
-            _reservations.value = firebaseReservations.toMutableList()
+            _reservations.value = firebaseReservations.mapValues { it.value.toMutableList() }.toMutableMap()
         }
     }
 
@@ -27,8 +28,16 @@ class ReservationViewModel : ViewModel() {
             firebaseRepository.deleteReservationByKey(firebaseKey)
         }
 
-        val updatedList = _reservations.value ?: mutableListOf()
-        updatedList.remove(reservation)
-        _reservations.value = updatedList
+        val roomReservations = _reservations.value?.get(reservation.roomName) ?: mutableListOf()
+        roomReservations.remove(reservation)
+        _reservations.value = _reservations.value // LiveData 갱신
+    }
+
+    fun getReservedTimesForRoom(roomName: String): Set<Int> {
+        return _reservations.value?.get(roomName)?.map { it.time }?.toSet() ?: emptySet()
     }
 }
+
+
+
+

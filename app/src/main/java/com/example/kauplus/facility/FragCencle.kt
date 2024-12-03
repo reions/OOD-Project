@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.MainActivity
 import com.example.kauplus.databinding.FragmentFragCencleBinding
-import com.example.kauplus.ui.meeting.FacilityRVAdapter
 import com.example.kauplus.viewmodel.ReservationViewModel
 
 class fragCencle : Fragment() {
@@ -35,17 +34,17 @@ class fragCencle : Fragment() {
         }
 
         reservationViewModel.reservations.observe(viewLifecycleOwner) { reservations ->
-            facilityRVAdapter.updateReservations(reservations)
+            // 모든 방의 예약 리스트를 합쳐 RecyclerView에 전달
+            val allReservations = reservations.values.flatten()
+            facilityRVAdapter.updateReservations(allReservations)
         }
     }
-
 
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).binding.navText.text = "내 예약"
         (activity as MainActivity).hideMoreAndShowBack(true)
         (activity as MainActivity).hideLogoAndShowTitle(true)
-
     }
 
     override fun onDestroyView() {
@@ -53,3 +52,4 @@ class fragCencle : Fragment() {
         binding = null
     }
 }
+

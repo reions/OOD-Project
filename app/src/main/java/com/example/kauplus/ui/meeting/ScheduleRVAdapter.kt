@@ -1,21 +1,22 @@
 package com.example.kauplus.ui.meeting
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kauplus.R
 import com.example.kauplus.databinding.ItemMeetingBinding
-import com.example.kauplus.viewmodel.MeetingViewModel
 
-class ScheduleRVAdapter (private val meetingList: LiveData<ArrayList<Meeting>>): RecyclerView.Adapter<ScheduleRVAdapter.NewsRVViewHolder>() {
+class ScheduleRVAdapter (private var meetingList: LiveData<ArrayList<Meeting>>): RecyclerView.Adapter<ScheduleRVAdapter.NewsRVViewHolder>() {
 
     interface MyItemClickListener{
         fun onItemClick(meetingId: String?)
         fun onDeleteMeeting(meetingId: String?)
 
+    }
+
+    fun updateList(newList: LiveData<ArrayList<Meeting>>) {
+        meetingList = newList
+        notifyDataSetChanged()
     }
     private lateinit var myItemClickListener: MyItemClickListener
     fun setMyItemClickListener(itemClickListener: MyItemClickListener){

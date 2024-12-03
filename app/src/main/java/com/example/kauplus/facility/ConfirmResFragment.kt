@@ -29,18 +29,32 @@ class confirmResFragment : DialogFragment() {
         binding = FragmentConfirmResBinding.inflate(inflater, container, false)
 
         val roomText = arguments?.getString("roomText") ?: "C1 스터디룸"
-        val timeText = arguments?.getString("timeText") ?: "시간 미선택"
-        val purposeText = arguments?.getString("purposeText") ?: "" // 추가된 목적 가져오기
-        binding?.textView27?.text = "$roomText $timeText"
+        val timeTextList = arguments?.getString("timeTextList") ?: ""
+        val purposeText = arguments?.getString("purposeText") ?: ""
 
-        // 확정 버튼 클릭 시 예약을 ViewModel에 추가
+        // 시간 리스트를 예약 확인 화면에 표시
+        binding?.textView27?.text = "$roomText $timeTextList"
+
+        // 확정 버튼 클릭 시 예약 데이터를 ViewModel에 추가
         binding?.viewOk?.setOnClickListener {
-            val reservation = Reservation(roomText, timeText, purposeText)
-            reservationViewModel.addReservation(reservation)
+            timeTextList.split(", ").forEach { timeRange ->
+                val reservation = Reservation(
+                    roomName = roomText,
+                    time = extractStartTime(timeRange),
+                    purpose = purposeText
+                )
+                reservationViewModel.addReservation(reservation)
+            }
+
+            // 바텀시트 닫기
+            dismissBottomSheet()
+
+            // 예약 완료 후 Fragment 전환
             dismiss()
             (activity as? MainActivity)?.addFragment(facilityAppFragment()) // 돌아가기
         }
 
+        // 취소 버튼 클릭 시 팝업 닫기
         binding?.viewCen?.setOnClickListener {
             dismiss()
         }
@@ -52,6 +66,21 @@ class confirmResFragment : DialogFragment() {
         super.onDestroyView()
         binding = null
     }
+
+    // 시간대에서 시작 시간을 추출하는 헬퍼 함수
+    private fun extractStartTime(timeRange: String): Int {
+        return timeRange.split(":")[0].toInt()
+    }
+
+    // 바텀시트(Fragment) 닫기
+    private fun dismissBottomSheet() {
+        val bottomSheet = parentFragmentManager.findFragmentByTag("facilityBottomSheet")
+        if (bottomSheet is facility_bottom_seatFragment) {
+            bottomSheet.dismiss()
+        }
+    }
 }
+
+
 
 
