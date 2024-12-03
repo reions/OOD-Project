@@ -1,4 +1,4 @@
-package com.example.kauplus.ui.meeting
+package com.example.kauplus.facility
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,43 +7,64 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.R
-import com.example.kauplus.facility.ReservationTime
 
 class Facility_ResRVAdapter(
     private val timeList: ArrayList<ReservationTime>,
+    private var reservedTimes: MutableSet<Int>, // 예약된 시간 목록
     private val onTimeSelected: (ReservationTime) -> Unit
 ) : RecyclerView.Adapter<Facility_ResRVAdapter.FacilityViewHolder>() {
 
-    private val selectedPositions = mutableSetOf<Int>() // 중복 선택 허용
+    private val selectedPositions = mutableSetOf<Int>() // 선택된 시간 목록
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacilityViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_item_res_time, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_item_res_time, parent, false)
         return FacilityViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FacilityViewHolder, position: Int) {
         val currentItem = timeList[position]
-        holder.textView.text = currentItem.time
+        val context = holder.textView.context
 
-        // 선택 상태에 따른 배경색 변경
-        if (selectedPositions.contains(position)) {
-            holder.textView.setBackgroundResource(R.drawable.blue_stroke_rectangle)
-            holder.textView.setTextColor(ContextCompat.getColor(holder.textView.context, R.color.white))
+        android.util.Log.d("FacilityAdapter", "Binding time: ${currentItem.time}, Reserved: ${reservedTimes.contains(currentItem.time)}")
+
+        if (reservedTimes.contains(currentItem.time)) {
+            // 예약된 시간의 UI
+            holder.textView.setBackgroundResource(R.drawable.reserved_time_background)
+            holder.textView.setTextColor(ContextCompat.getColor(context, R.color.white))
+            holder.itemView.isEnabled = false // 클릭 비활성화
         } else {
-            holder.textView.setBackgroundResource(R.drawable.gray_stroke_rectangle)
-            holder.textView.setTextColor(ContextCompat.getColor(holder.textView.context, R.color.black))
+            // 예약 가능 시간 UI
+            holder.textView.setBackgroundResource(
+                if (selectedPositions.contains(position)) {
+                    R.drawable.blue_stroke_rectangle // 선택된 경우
+                } else {
+                    R.drawable.gray_stroke_rectangle // 선택되지 않은 경우
+                }
+            )
+            holder.textView.setTextColor(
+                if (selectedPositions.contains(position)) {
+                    ContextCompat.getColor(context, R.color.white)
+                } else {
+                    ContextCompat.getColor(context, R.color.black)
+                }
+            )
+
+            // 클릭 이벤트 설정
+            holder.itemView.isEnabled = true
+            holder.itemView.setOnClickListener {
+                if (selectedPositions.contains(position)) {
+                    selectedPositions.remove(position)
+                } else {
+                    selectedPositions.add(position)
+                    onTimeSelected(currentItem)
+                }
+                notifyItemChanged(position)
+            }
         }
 
-        // 항목 클릭 시 선택 상태 업데이트 및 콜백 전달
-        holder.itemView.setOnClickListener {
-            if (selectedPositions.contains(position)) {
-                selectedPositions.remove(position) // 이미 선택된 경우 해제
-            } else {
-                selectedPositions.add(position) // 새로운 선택 추가
-                onTimeSelected(currentItem) // 선택한 시간 전달
-            }
-            notifyItemChanged(position) // 선택된 항목만 업데이트
-        }
+        // 시간 텍스트 설정
+        holder.textView.text = "${currentItem.time}:00 ~ ${currentItem.time + 1}:00"
     }
 
     override fun getItemCount(): Int = timeList.size
@@ -51,4 +72,14 @@ class Facility_ResRVAdapter(
     inner class FacilityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.textView19)
     }
+
+    // 예약된 시간 업데이트 및 UI 갱신
+    fun updateReservedTimes(newReservedTimes: Set<Int>) {
+        reservedTimes = newReservedTimes.toMutableSet() // Set을 MutableSet으로 변환하여 교체
+        android.util.Log.d("FacilityAdapter", "Updated reservedTimes in adapter: $reservedTimes")
+        notifyDataSetChanged() // RecyclerView 강제 갱신
+    }
 }
+
+
+

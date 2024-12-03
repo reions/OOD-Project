@@ -1,10 +1,9 @@
-package com.example.kauplus.ui.meeting
+package com.example.kauplus.facility
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kauplus.databinding.ItemMeetingBinding
-import com.example.kauplus.facility.Reservation
 import com.example.kauplus.viewmodel.ReservationViewModel
 
 class FacilityRVAdapter(
@@ -25,7 +24,7 @@ class FacilityRVAdapter(
     override fun onBindViewHolder(holder: NewsRVViewHolder, position: Int) {
         val currentReservation = reservation[position]
         holder.title.text = currentReservation.roomName
-        holder.time.text = currentReservation.time
+        holder.time.text = "${currentReservation.time}:00 ~ ${currentReservation.time + 1}:00" // Int 값을 문자열로 변환하여 표시
         holder.place.text = currentReservation.purpose
 
         holder.delete.setOnClickListener {
@@ -50,4 +49,3 @@ class FacilityRVAdapter(
         notifyDataSetChanged()
     }
 }
-
