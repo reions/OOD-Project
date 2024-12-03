@@ -12,19 +12,26 @@ import com.google.firebase.database.ValueEventListener
 class FacilityFirebaseRepository {
     private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("reservations")
 
-    private val _reservations = MutableLiveData<List<Reservation>>()
-    val reservations: LiveData<List<Reservation>> get() = _reservations
+    private val _reservations = MutableLiveData<Map<String, List<Reservation>>>()
+    val reservations: LiveData<Map<String, List<Reservation>>> get() = _reservations
 
     init {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val reservationList = mutableListOf<Reservation>()
+                val reservationMap = mutableMapOf<String, MutableList<Reservation>>()
                 for (reservationSnapshot in snapshot.children) {
-                    val reservation = reservationSnapshot.getValue(Reservation::class.java)
-                    reservation?.firebaseKey = reservationSnapshot.key // Firebase 키 저장
-                    reservation?.let { reservationList.add(it) }
+                    val reservation = reservationSnapshot.getValue(Reservation::class.java)?.apply {
+                        val timeValue = reservationSnapshot.child("time").getValue(Long::class.java)?.toInt()
+                            ?: reservationSnapshot.child("time").getValue(String::class.java)?.toIntOrNull()
+                            ?: 0
+                        this.time = timeValue
+                        this.firebaseKey = reservationSnapshot.key
+                    }
+                    reservation?.let {
+                        reservationMap.getOrPut(it.roomName) { mutableListOf() }.add(it)
+                    }
                 }
-                _reservations.value = reservationList
+                _reservations.value = reservationMap
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -42,3 +49,5 @@ class FacilityFirebaseRepository {
         database.child(reservationKey).removeValue()
     }
 }
+
+
