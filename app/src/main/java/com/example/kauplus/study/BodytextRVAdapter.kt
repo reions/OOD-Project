@@ -32,8 +32,8 @@ class BodytextRVAdapter(
         val binding = ItemBodytextBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BodytextViewHolder(binding)
     }
-    fun updateBodytexts(newBodytexts: List<Bodytext>) {
-        bodytextList = newBodytexts
+    fun updateBodytexts(newBodytexts: List<Bodytext?>) {
+        bodytextList = newBodytexts as List<Bodytext>
         notifyDataSetChanged() // RecyclerView를 갱신
     }
 
