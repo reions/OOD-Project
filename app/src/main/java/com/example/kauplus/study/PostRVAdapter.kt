@@ -51,7 +51,7 @@ class PostRVAdapter(itemList: List<Posts>) : RecyclerView.Adapter<PostRVAdapter.
         holder.title.text = postList[position].posting_title
         holder.time.text = postList[position].time
         holder.place.text = postList[position].space
-        holder.participant.text = postList[position].participant
+        holder.participant.text = "${posts.currentParticipants}/${posts.maxParticipants}"
         holder.itemView.setOnClickListener{
             myItemClickListener?.onItemClick(position)
         }

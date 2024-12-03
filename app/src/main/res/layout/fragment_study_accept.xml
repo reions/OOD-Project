@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/btn_cancle"
         android:layout_width="180dp"
         android:layout_height="56dp"
         android:src="@drawable/rounded_cornor_left"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageView8" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/btn_accept"
         android:layout_width="180dp"
         android:layout_height="56dp"
         android:src="@drawable/rounded_cornor_right"
@@ -43,10 +43,10 @@
         android:text="취소"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-        app:layout_constraintEnd_toEndOf="@+id/imageView9"
-        app:layout_constraintStart_toStartOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_cancle"
+        app:layout_constraintEnd_toEndOf="@+id/btn_cancle"
+        app:layout_constraintStart_toStartOf="@+id/btn_cancle"
+        app:layout_constraintTop_toTopOf="@+id/btn_cancle" />
 
     <TextView
         android:id="@+id/txt_accept"
@@ -55,10 +55,10 @@
         android:text="확정"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/imageView10" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_accept"
+        app:layout_constraintEnd_toEndOf="@+id/btn_accept"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancle"
+        app:layout_constraintTop_toTopOf="@+id/btn_accept" />
 
     <TextView
         android:id="@+id/txt_pardon"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/btn_close"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="12dp"

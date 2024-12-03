@@ -83,12 +83,14 @@ class PostDetailFragment : Fragment() {
             }
         }
 
-        /*binding?.txtJoin?.setOnClickListener {
-            val studyAccept = StudyAcceptFragment()
-            StudyAcceptFragment.show(parentFragmentManager, "studyAcceptFragment")
-            dismiss()
-        }*/
-
+        binding?.txtJoin?.setOnClickListener {
+            val studyAcceptFragment = StudyAcceptFragment().apply {
+                arguments = Bundle().apply {
+                    putString("postId", postId)
+                }
+            }
+            studyAcceptFragment.show(parentFragmentManager, "StudyAcceptFragment")
+        }
 
         return binding?.root
     }

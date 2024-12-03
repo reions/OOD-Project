@@ -5,7 +5,8 @@ data class Posts(
     val posting_title: String = "",
     val time: String = "",
     val space: String = "",
-    val participant: String = "",
+    val currentParticipants: Int = 1, // 현재 인원
+    val maxParticipants: Int = 5, // 최대 인원
     var firebaseKey: String? = null
 )
 data class Bodytext(

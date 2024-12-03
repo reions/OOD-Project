@@ -56,4 +56,13 @@ class PostRepository {
     suspend fun saveBodytext(postId: String, bodytext: Bodytext) {
         database.child(postId).child("bodytext").setValue(bodytext).await()
     }
+
+    suspend fun updateParticipantCount(postId: String, newCount: Int) {
+        try {
+            database.child(postId).child("currentParticipants").setValue(newCount).await()
+        } catch (e: Exception) {
+            // 예외 처리
+        }
+    }
+
 }

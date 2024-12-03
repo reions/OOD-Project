@@ -46,6 +46,11 @@ class PostViewModel : ViewModel() {
             fetchComments(postId)
         }
     }
+    fun updateParticipantCount(postId: String, newCount: Int) {
+        viewModelScope.launch {
+            repository.updateParticipantCount(postId, newCount)
+        }
+    }
 
 
     fun saveBodytext(postId: String, bodytext: Bodytext) {
