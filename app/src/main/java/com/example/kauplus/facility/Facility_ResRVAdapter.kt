@@ -73,12 +73,8 @@ class Facility_ResRVAdapter(
         val textView: TextView = itemView.findViewById(R.id.textView19)
     }
 
-    // 예약된 시간 업데이트 및 UI 갱신
-    fun updateReservedTimes(newReservedTimes: Set<Int>) {
-        reservedTimes = newReservedTimes.toMutableSet() // Set을 MutableSet으로 변환하여 교체
-        android.util.Log.d("FacilityAdapter", "Updated reservedTimes in adapter: $reservedTimes")
-        notifyDataSetChanged() // RecyclerView 강제 갱신
-    }
+
+
 }
 
 

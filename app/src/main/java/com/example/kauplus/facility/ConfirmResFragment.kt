@@ -28,6 +28,11 @@ class confirmResFragment : DialogFragment() {
     ): View? {
         binding = FragmentConfirmResBinding.inflate(inflater, container, false)
 
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val roomText = arguments?.getString("roomText") ?: "C1 스터디룸"
         val timeTextList = arguments?.getString("timeTextList") ?: ""
         val purposeText = arguments?.getString("purposeText") ?: ""
@@ -59,7 +64,7 @@ class confirmResFragment : DialogFragment() {
             dismiss()
         }
 
-        return binding?.root
+
     }
 
     override fun onDestroyView() {

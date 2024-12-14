@@ -94,6 +94,7 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
         }
 
     }
+
     companion object {
         fun newInstance(meetingId: String): MeetingDetailBottomSheet {
             val fragment = MeetingDetailBottomSheet()
