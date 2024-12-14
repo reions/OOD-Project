@@ -24,7 +24,7 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentFacilityBottomSeatBinding.inflate(inflater, container, false)
 
         // 방 이름 가져오기
@@ -105,7 +105,7 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
             }
         }
 
-        return binding!!.root
+        return binding?.root
     }
 
     override fun onDestroy() {

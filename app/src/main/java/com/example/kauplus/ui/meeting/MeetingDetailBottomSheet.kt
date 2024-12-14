@@ -16,14 +16,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
 
     val viewModel: MeetingViewModel by activityViewModels()
-    private lateinit var binding: BottomSheetMeetingDetailBinding
+    private var binding: BottomSheetMeetingDetailBinding?=null
     private lateinit var meetingId: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = BottomSheetMeetingDetailBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,9 +38,9 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                 val place=it.place
                 val toDo=it.toDo
 
-                binding.title.text = it.title
-                binding.time.text = "\u2022 ${it.time}"
-                binding.place.text = "\u2022 ${it.place}"
+                binding?.title?.text = it.title
+                binding?.time?.text = "\u2022 ${it.time}"
+                binding?.place?.text = "\u2022 ${it.place}"
 
                 Log.d("이미지", it.img1.toString())
                 Log.d("이미지", it.img2.toString())
@@ -49,22 +49,22 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                 Glide.with(this)
                     .load(it.img1)
                     .placeholder(com.example.kauplus.R.drawable.img_bg)
-                    .into(binding.imgMeeting1)
+                    .into(binding?.imgMeeting1?:throw Exception("imgMeeting is null"))
 
                 Glide.with(this)
                     .load(it.img2)
                     .placeholder(com.example.kauplus.R.drawable.img_bg)
-                    .into(binding.imgMeeting2)
+                    .into(binding?.imgMeeting2?:throw Exception("imgMeeting is null"))
 
                 Glide.with(this)
                     .load(it.img3)
                     .placeholder(com.example.kauplus.R.drawable.img_bg)
-                    .into(binding.imgMeeting3)
+                    .into(binding?.imgMeeting3?:throw Exception("imgMeeting is null"))
 
                 val toDoAdapter = ToDoRVAdapter(requireContext(), it.toDo)
-                binding.listToDo.adapter = toDoAdapter
+                binding?.listToDo?.adapter = toDoAdapter
 
-                binding.btnShare.setOnClickListener {
+                binding?.btnShare?.setOnClickListener {
                     val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
                     intent.type = "text/plain"
 
@@ -86,7 +86,7 @@ class MeetingDetailBottomSheet : BottomSheetDialogFragment() {
                     val chooserTitle = "친구에게 공유하기"
                     startActivity(Intent.createChooser(intent, chooserTitle))
                 }
-                binding.btnClose.setOnClickListener {
+                binding?.btnClose?.setOnClickListener {
                     viewModel.closeMeeting(meetingId)
                     dismiss()
                 }
