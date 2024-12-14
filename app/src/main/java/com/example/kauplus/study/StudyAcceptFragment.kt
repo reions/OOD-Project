@@ -24,13 +24,18 @@ class StudyAcceptFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_study_accept, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val postId = arguments?.getString("postId") ?: ""
         val post = viewModel.posts.value?.find { it.id == postId }
 
         // 취소 버튼 이벤트
         view.findViewById<View>(R.id.btn_cancle).setOnClickListener {
-            dismiss() // 팝업 닫기
+            dismiss()
         }
 
         // 확정 버튼 이벤트
@@ -48,9 +53,8 @@ class StudyAcceptFragment : DialogFragment() {
 
         // X 버튼 이벤트
         view.findViewById<View>(R.id.btn_close).setOnClickListener {
-            dismiss() // 팝업 닫기
+            dismiss()
         }
-
-        return view
     }
+
 }

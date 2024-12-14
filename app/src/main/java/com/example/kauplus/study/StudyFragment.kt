@@ -30,5 +30,4 @@ class StudyFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-    }
-}
+    }}

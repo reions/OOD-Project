@@ -38,12 +38,16 @@ class PostDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPostDetailBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val postId = arguments?.getString("postId") ?: ""
         viewModel.fetchBodytext(postId) // 데이터 로드
 
-        val bodytextAdapter = BodytextRVAdapter(emptyList()) { bodytext ->
+        val bodytextAdapter = BodytextRVAdapter(emptyList()) { _ ->
         }
         binding?.rvBodytext?.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -52,7 +56,6 @@ class PostDetailFragment : Fragment() {
 
         viewModel.selectedBodytext.observe(viewLifecycleOwner) { bodytext ->
             bodytext?.let {
-                // 단일 객체를 리스트로 변환하여 Adapter에 전달
                 bodytextAdapter.updateBodytexts(listOf(it))
             }
         }
@@ -72,12 +75,14 @@ class PostDetailFragment : Fragment() {
         binding?.btnSend?.setOnClickListener {
             val commentText = binding?.etCommentInput?.text.toString()
             if (commentText.isNotBlank()) {
-                val currentTime = SimpleDateFormat("MM/dd HH:mm", Locale.getDefault()).format(Date())
+                val currentTime =
+                    SimpleDateFormat("MM/dd HH:mm", Locale.getDefault()).format(Date())
                 val newComment = Comment(commentText, currentTime, "사용자")
 
-                viewModel.addComment(postId, newComment)
                 binding?.etCommentInput?.text?.clear() // 입력 필드 초기화
                 Toast.makeText(context, "댓글이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                viewModel.addComment(postId, newComment)
+
             } else {
                 Toast.makeText(context, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -91,9 +96,8 @@ class PostDetailFragment : Fragment() {
             }
             studyAcceptFragment.show(parentFragmentManager, "StudyAcceptFragment")
         }
-
-        return binding?.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

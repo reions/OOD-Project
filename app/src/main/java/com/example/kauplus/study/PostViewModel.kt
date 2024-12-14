@@ -52,10 +52,4 @@ class PostViewModel : ViewModel() {
         }
     }
 
-
-    fun saveBodytext(postId: String, bodytext: Bodytext) {
-        viewModelScope.launch {
-            repository.saveBodytext(postId, bodytext)
-        }
-    }
 }

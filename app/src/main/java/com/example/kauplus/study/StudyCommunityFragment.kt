@@ -31,7 +31,11 @@ class StudyCommunityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudyCommunityBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.posts.observe(viewLifecycleOwner) { posts ->
             val postRVAdapter = PostRVAdapter(posts.toMutableList())
             binding?.rvPosts?.apply {
@@ -52,8 +56,8 @@ class StudyCommunityFragment : Fragment() {
                 }
             })
         }
-        return binding?.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

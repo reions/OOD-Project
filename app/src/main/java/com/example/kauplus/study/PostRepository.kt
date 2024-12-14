@@ -25,7 +25,6 @@ class PostRepository {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle error
             }
         })
     }
@@ -51,10 +50,6 @@ class PostRepository {
     suspend fun saveComment(postId: String, comment: Comment) {
         val key = database.child(postId).child("comments").push().key ?: return
         database.child(postId).child("comments").child(key).setValue(comment).await()
-    }
-
-    suspend fun saveBodytext(postId: String, bodytext: Bodytext) {
-        database.child(postId).child("bodytext").setValue(bodytext).await()
     }
 
     suspend fun updateParticipantCount(postId: String, newCount: Int) {
