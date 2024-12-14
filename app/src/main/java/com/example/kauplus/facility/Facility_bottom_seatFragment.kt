@@ -26,7 +26,11 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFacilityBottomSeatBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // 방 이름 가져오기
         val roomText = arguments?.getString("roomText") ?: "C1 스터디룸"
         binding?.txtName?.text = roomText
@@ -104,8 +108,6 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
                 dismiss()
             }
         }
-
-        return binding?.root
     }
 
     override fun onDestroy() {
