@@ -25,8 +25,8 @@ import com.example.kauplus.databinding.FragmentWriteMeetingBinding
 import com.example.kauplus.viewmodel.MeetingViewModel
 
 class WriteMeetingFragment : Fragment() {
-    private lateinit var binding: FragmentWriteMeetingBinding
-    val viewModel: MeetingViewModel by activityViewModels()
+    private var binding: FragmentWriteMeetingBinding?=null
+    private val viewModel: MeetingViewModel by activityViewModels()
     private var imageUris = mutableListOf<Uri?>(null, null, null)
     private var selectedImage = ""
 
@@ -43,15 +43,15 @@ class WriteMeetingFragment : Fragment() {
                     val targetImageView = when (selectedImage) {
                         "img1" -> {
                             imageUris[0] = uri
-                            binding.imgMeeting1
+                            binding?.imgMeeting1
                         }
                         "img2" -> {
                             imageUris[1] = uri
-                            binding.imgMeeting2
+                            binding?.imgMeeting2
                         }
                         "img3" -> {
                             imageUris[2] = uri
-                            binding.imgMeeting3
+                            binding?.imgMeeting3
                         }
                         else -> null
                     }
@@ -77,38 +77,38 @@ class WriteMeetingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentWriteMeetingBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val writeToDoRVAdapter = WriteToDoRVAdapter(arrayListOf())
-        binding.rvWriteToDo.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rvWriteToDo.adapter = writeToDoRVAdapter
+        binding?.rvWriteToDo?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding?.rvWriteToDo?.adapter = writeToDoRVAdapter
 
-        binding.btnWriteToDo.setOnClickListener {
+        binding?.btnWriteToDo?.setOnClickListener {
             writeToDoRVAdapter.editList.add("")
             writeToDoRVAdapter.notifyDataSetChanged()
         }
 
-        binding.imgMeeting1.setOnClickListener {
+        binding?.imgMeeting1?.setOnClickListener {
             selectImage("img1")
         }
 
-        binding.imgMeeting2.setOnClickListener {
+        binding?.imgMeeting2?.setOnClickListener {
             selectImage("img2")
         }
 
-        binding.imgMeeting3.setOnClickListener {
+        binding?.imgMeeting3?.setOnClickListener {
             selectImage("img3")
         }
 
-        binding.btnWriteFinish.setOnClickListener {
-            val title = binding.etTitle.text.toString()
-            val time = binding.etTime.text.toString()
-            val place = binding.etPlace.text.toString()
+        binding?.btnWriteFinish?.setOnClickListener {
+            val title = binding?.etTitle?.text.toString()
+            val time = binding?.etTime?.text.toString()
+            val place = binding?.etPlace?.text.toString()
             val toDoList = writeToDoRVAdapter.editList.filter { it.isNotEmpty() }
             Log.d("이미지", imageUris.toString())
             viewModel.saveMeeting(title, time, place, toDoList, imageUris)
@@ -145,5 +145,6 @@ class WriteMeetingFragment : Fragment() {
         (activity as MainActivity).binding.navText.text="회의 일정"
         (activity as MainActivity).hideMoreAndShowBack(false)
         (activity as MainActivity).hideLogoAndShowTitle(true)
+        binding = null
     }
 }

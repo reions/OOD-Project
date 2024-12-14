@@ -15,8 +15,7 @@ import com.example.kauplus.viewmodel.MeetingViewModel
 
 class ScheduleFragment : Fragment() {
 
-    private var itemList: ArrayList<Meeting> = ArrayList()
-    private lateinit var binding: FragmentScheduleBinding
+    private var binding: FragmentScheduleBinding?=null
     val viewModel: MeetingViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,24 +28,18 @@ class ScheduleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = binding.rvMeeting
+        val recyclerView = binding?.rvMeeting
         val scheduleRVAdapter = ScheduleRVAdapter(viewModel.openedSchedule)
-        recyclerView.layoutManager =
+        recyclerView?.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = scheduleRVAdapter
-        /*
-        itemList = arrayListOf(
-            Meeting("프로젝트 X 8주차 회의", "14:00~15:00", "C1 스터디룸"),
-            Meeting("산학 2주차 회의", "13:00~14:00", "전자관 413호")
-        )
-        */
+        recyclerView?.adapter = scheduleRVAdapter
 
         viewModel.closedSchedule.observe(viewLifecycleOwner) {
             scheduleRVAdapter.notifyDataSetChanged()
@@ -67,43 +60,48 @@ class ScheduleFragment : Fragment() {
 
         })
 
-        binding.textReservedMeeting.setOnClickListener {
-            binding.textReservedMeeting.setTextColor(
+        binding?.textReservedMeeting?.setOnClickListener {
+            binding?.textReservedMeeting?.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.black
                 )
             )
-            binding.textClosedMeeting.setTextColor(
+            binding?.textClosedMeeting?.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.gray
                 )
             )
-            binding.btnWriteMeeting.visibility = View.VISIBLE
+            binding?.btnWriteMeeting?.visibility = View.VISIBLE
             scheduleRVAdapter.updateList(viewModel.openedSchedule)
 
         }
-        binding.textClosedMeeting.setOnClickListener {
-            binding.textReservedMeeting.setTextColor(
+        binding?.textClosedMeeting?.setOnClickListener {
+            binding?.textReservedMeeting?.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.gray
                 )
             )
-            binding.textClosedMeeting.setTextColor(
+            binding?.textClosedMeeting?.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     R.color.black
                 )
             )
-            binding.btnWriteMeeting.visibility = View.GONE
+            binding?.btnWriteMeeting?.visibility = View.GONE
             scheduleRVAdapter.updateList(viewModel.closedSchedule)
         }
 
-        binding.btnWriteMeeting.setOnClickListener {
+        binding?.btnWriteMeeting?.setOnClickListener {
             (activity as MainActivity).addFragment(WriteMeetingFragment())
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }
