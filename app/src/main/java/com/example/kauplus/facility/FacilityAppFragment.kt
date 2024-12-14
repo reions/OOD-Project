@@ -29,7 +29,17 @@ class facilityAppFragment : Fragment() {
     ): View? {
         binding= FragmentFacilityAppBinding.inflate(inflater,container,false)
 
+        return binding?.root
+    }
+    private fun setupRecyclerView(recyclerView: RecyclerView?, roomList: List<String>) {
+        recyclerView?.layoutManager = LinearLayoutManager(requireContext(),  LinearLayoutManager.HORIZONTAL, false)
+        recyclerView?.adapter = RoomAdapter(roomList) { roomText ->
+            onItemClick(roomText)
+        }
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val studyRooms = listOf("C1 스터디룸", "C2 스터디룸", "C3 스터디룸")
         val electronicsRooms = listOf("전자관 201호", "전자관 202호", "전자관 413호")
         val sportsFacilities = listOf("농구장", "테니스장", "축구장")
@@ -47,14 +57,6 @@ class facilityAppFragment : Fragment() {
             (activity as MainActivity).addFragment(fragCencle())
         }
 
-
-        return binding?.root
-    }
-    private fun setupRecyclerView(recyclerView: RecyclerView?, roomList: List<String>) {
-        recyclerView?.layoutManager = LinearLayoutManager(requireContext(),  LinearLayoutManager.HORIZONTAL, false)
-        recyclerView?.adapter = RoomAdapter(roomList) { roomText ->
-            onItemClick(roomText)
-        }
     }
 
 
