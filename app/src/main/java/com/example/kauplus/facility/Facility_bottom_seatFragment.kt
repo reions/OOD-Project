@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kauplus.databinding.FragmentFacilityBottomSeatBinding
@@ -24,10 +25,13 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): ConstraintLayout? {
         binding = FragmentFacilityBottomSeatBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
-        // 방 이름 가져오기
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val roomText = arguments?.getString("roomText") ?: "C1 스터디룸"
         binding?.txtName?.text = roomText
 
@@ -46,6 +50,7 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
             ReservationTime(19),
             ReservationTime(20),
             ReservationTime(21),
+            ReservationTime(22),
             ReservationTime(23)
         )
 
@@ -105,8 +110,8 @@ class facility_bottom_seatFragment : BottomSheetDialogFragment() {
             }
         }
 
-        return binding?.root
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
